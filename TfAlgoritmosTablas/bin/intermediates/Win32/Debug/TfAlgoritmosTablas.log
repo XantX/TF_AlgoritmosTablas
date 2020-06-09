@@ -1,5 +1,0 @@
-﻿  main.cpp
-  .NETFramework,Version=v4.5.2.AssemblyAttributes.cpp
-  main.obj : /DEBUG:FASTLINK no se admite cuando hay presente código administrado; reiniciando vínculo con /DEBUG:FULL
-  TfAlgoritmosTablas.vcxproj -> C:\Users\SEBASTIAN\Desktop\TFAlgoritmos\TfAlgoritmosTablas\bin\Win32\Debug\TfAlgoritmosTablas.exe
-  TfAlgoritmosTablas.vcxproj -> C:\Users\SEBASTIAN\Desktop\TFAlgoritmos\TfAlgoritmosTablas\bin\Win32\Debug\TfAlgoritmosTablas.pdb (Partial PDB)
