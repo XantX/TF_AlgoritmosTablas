@@ -3,6 +3,7 @@
 #include <iostream>
 #include "Nodo.hpp"
 #include <functional>
+#include <vector>
 using namespace std;
 
 template<typename T>
@@ -17,17 +18,39 @@ string NameTree;
 
     void _add(T ,Nodo<T>*&);
     void _inorder(Nodo<T>*);
-
+    void ReInorder(Nodo<T>*);
+    vector<T> INor;
 public:
     Tree(string);
     ~Tree();
     void setImpresion(function<void(T)>);
     void setCriterio(function<bool(T,T)>);
+    vector<T> RetornoInorder();
     string GetNameTrees();
     void InOrder();
     void Add(T);
 };
 //===============================================
+template<typename T>
+void Tree<T>::ReInorder(Nodo<T>* nodo){
+    if(nodo == nullptr){
+        return;
+    }else{
+        ReInorder(nodo->Izq);
+        INor.push_back(nodo->data);
+        ReInorder(nodo->Der);
+    }
+    
+}
+template<typename T>
+vector<T> Tree<T>::RetornoInorder(){
+    if(raiz != nullptr){
+        ReInorder(raiz);
+    }else{
+        cout<<"Arbol vacio";
+    }
+    return INor;
+}
 template<typename T>
 Tree<T>::Tree(string Name){
     raiz = nullptr;
