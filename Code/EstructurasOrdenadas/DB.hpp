@@ -5,6 +5,7 @@
 #include "iterador.hpp"
 #include "Tree.hpp"
 #include "criterios.hpp"
+#include "../TFAlgoritmos/Code/Menu/ClassMenuDB.hpp"
 #include <string>
 #include <fstream>
 #include <sstream>
@@ -16,12 +17,16 @@ typedef ListaEnlazada<LS> LLS;
 class DB
 {
 private:
+    ClassMenuDB Menu;
     ifstream archivo;
     LLS DataB;
     string cadena;
     long long Columnas;
     long long filas;
+
     map<string,long long> ColumnasName;
+    vector<string> Columanss;
+
     vector<Tree<LS>> ArbolesFilasIN;
     vector<Tree<string>> ArbolesColumIN;
     
@@ -31,12 +36,16 @@ public:
     void IndexarFila(string);
     void IndexarColumna(string, int);
     void addFila();
+    void addCOlunmasName();
     vector<Tree<string>> GetVectorColumnas();
     vector<Tree<LS>> GetVectorFilas();
     
     map<string,long long> getMapa(){return ColumnasName;}
     long long GetColSize(){
         return DataB.getSize();
+    }
+    vector<string> getColumss(){
+        return Columanss;
     }
     LLS& GetDB(){
         return DataB;
@@ -77,9 +86,13 @@ DB::DB()
    
 }
 void DB::NonbreColum(){
+    string nombres;
      for (int i = 0; i < Columnas; i++)
     {
+        nombres = DataB[0][i];
         ColumnasName[DataB[0][i]] = i;
+        
+        Columanss.push_back(nombres);
     }
 }
 long long DB::getFilas(){
@@ -128,7 +141,10 @@ void DB::IndexarColumna(string columna,int Id){
  }
 
  void DB::addFila(){
-     
+     Menu.AddFilaM(Columanss);
+ }
+ void DB::addCOlunmasName(){
+     Menu.AddCOlumnas(Columanss,ColumnasName);
  }
 DB::~DB()
 {
