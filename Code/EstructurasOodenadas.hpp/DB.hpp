@@ -30,6 +30,7 @@ public:
     DB();
     void IndexarFila(string);
     void IndexarColumna(string, int);
+    void addFila();
     vector<Tree<string>> GetVectorColumnas();
     vector<Tree<LS>> GetVectorFilas();
     
@@ -43,7 +44,7 @@ public:
     long long getFilas();
     long long getColumnas();
 
-     void reading(string nombre)
+    void reading(string nombre)
     {
         archivo.open(nombre);
         while (getline(archivo, cadena))
@@ -124,6 +125,10 @@ void DB::IndexarColumna(string columna,int Id){
  }
  vector<Tree<string>> DB::GetVectorColumnas(){
      return ArbolesColumIN;
+ }
+
+ void DB::addFila(){
+     
  }
 DB::~DB()
 {
