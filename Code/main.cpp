@@ -10,6 +10,9 @@ int main()
     database.addCOlunmasName();
 
     database.GetDB()[0].ShowAll(printString);
+
+    database.addFila();
     
+    database.GetDB()[1].ShowAll(printString);
     return 0;
 }

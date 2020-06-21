@@ -26,7 +26,7 @@ LS ClassMenuDB::AddFilaM(vector<string> &filasName){
     LS NUEVAFILA;
     for (long long i = 0; i < filasName.size(); i++)
     {
-        cout<<"Ingrese el dato de la columna "<<filasName[0]<<":"<<endl;
+        cout<<"Ingrese el dato de la columna "<<filasName[i]<<":"<<endl;
         cin>>Dato;
         NUEVAFILA.add(Dato);
         cin.ignore();

@@ -141,7 +141,7 @@ void DB::IndexarColumna(string columna,int Id){
  }
 
  void DB::addFila(){
-     Menu.AddFilaM(Columanss);
+    DataB.add(Menu.AddFilaM(Columanss));
  }
  void DB::addCOlunmasName(){
      DataB.add(Menu.AddCOlumnas(Columanss,ColumnasName));
