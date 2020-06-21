@@ -1,5 +1,5 @@
 #include "EstructurasOrdenadas/DB.hpp"
-#include "Menu/ClassManu.hpp"
+#include "EstructurasOrdenadas/ClassManu.hpp"
 #include "EstructurasOrdenadas/criterios.hpp"
 
 int main()
@@ -10,5 +10,6 @@ int main()
     database.addCOlunmasName();
 
     database.GetDB()[0].ShowAll(printString);
+    
     return 0;
 }

@@ -5,12 +5,12 @@
 #include "iterador.hpp"
 #include "Tree.hpp"
 #include "criterios.hpp"
-#include "../TFAlgoritmos/Code/Menu/ClassMenuDB.hpp"
 #include <string>
 #include <fstream>
 #include <sstream>
 #include <vector>
 #include <map>
+#include "ClassMenuDB.hpp"
 using namespace std;
 typedef ListaEnlazada<string> LS;
 typedef ListaEnlazada<LS> LLS;
@@ -144,7 +144,7 @@ void DB::IndexarColumna(string columna,int Id){
      Menu.AddFilaM(Columanss);
  }
  void DB::addCOlunmasName(){
-     Menu.AddCOlumnas(Columanss,ColumnasName);
+     DataB.add(Menu.AddCOlumnas(Columanss,ColumnasName));
  }
 DB::~DB()
 {

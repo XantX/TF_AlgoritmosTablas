@@ -4,7 +4,7 @@
 #include <map>
 #include <string>
 
-#include "../TFAlgoritmos/Code/EstructurasOrdenadas/ListaEnlazada.hpp"
+#include "ListaEnlazada.hpp"
 using namespace std;
 typedef ListaEnlazada<string> LS;
 class ClassMenuDB
@@ -13,7 +13,7 @@ private:
     
 public:
     LS AddFilaM(vector<string>&);
-    void AddCOlumnas(vector<string>&, map<string,long long>&);
+    LS AddCOlumnas(vector<string>&, map<string,long long>&);
     ClassMenuDB();
     ~ClassMenuDB();
 };
@@ -33,7 +33,8 @@ LS ClassMenuDB::AddFilaM(vector<string> &filasName){
     }
     return NUEVAFILA;
 }
-void ClassMenuDB::AddCOlumnas(vector<string>& Names, map<string,long long>& NameAIndice){
+LS ClassMenuDB::AddCOlumnas(vector<string>& Names, map<string,long long>& NameAIndice){
+    LS PrimeraFila;
     long long NumColumnas = 0;
     cout<<"Digite el numero de columnas que tendra la tabla :   ";
     cin>>NumColumnas;
@@ -50,9 +51,10 @@ void ClassMenuDB::AddCOlumnas(vector<string>& Names, map<string,long long>& Name
             cin>>DAto;
         }
         Names.push_back(DAto);
+        PrimeraFila.add(DAto);
         NameAIndice[DAto] = i;
     }
-    
+    return PrimeraFila;
 }
 ClassMenuDB::~ClassMenuDB()
 {
