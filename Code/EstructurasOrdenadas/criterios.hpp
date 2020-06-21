@@ -13,7 +13,7 @@ auto printNum = [](int x){
   cout<<x;
 };
 auto printString = [](string x){
-  cout<<x<<endl;
+  cout<<x<<" ";
 };
 
 auto CriterioMa = [](LS Lista1, LS Lista2 ){

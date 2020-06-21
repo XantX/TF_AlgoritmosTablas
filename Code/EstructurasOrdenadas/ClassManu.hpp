@@ -11,6 +11,7 @@ public:
     ~ClassMenu();
     void Principal();
     void Tabla();
+    
 };
 
 ClassMenu::ClassMenu()

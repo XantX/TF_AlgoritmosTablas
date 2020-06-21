@@ -10,18 +10,23 @@
 #include <sstream>
 #include <vector>
 #include <map>
+#include "ClassMenuDB.hpp"
 using namespace std;
 typedef ListaEnlazada<string> LS;
 typedef ListaEnlazada<LS> LLS;
 class DB
 {
 private:
+    ClassMenuDB Menu;
     ifstream archivo;
     LLS DataB;
     string cadena;
     long long Columnas;
     long long filas;
+
     map<string,long long> ColumnasName;
+    vector<string> Columanss;
+
     vector<Tree<LS>> ArbolesFilasIN;
     vector<Tree<string>> ArbolesColumIN;
     
@@ -30,6 +35,8 @@ public:
     DB();
     void IndexarFila(string);
     void IndexarColumna(string, int);
+    void addFila();
+    void addCOlunmasName();
     vector<Tree<string>> GetVectorColumnas();
     vector<Tree<LS>> GetVectorFilas();
     
@@ -37,13 +44,16 @@ public:
     long long GetColSize(){
         return DataB.getSize();
     }
+    vector<string> getColumss(){
+        return Columanss;
+    }
     LLS& GetDB(){
         return DataB;
     }
     long long getFilas();
     long long getColumnas();
 
-     void reading(string nombre)
+    void reading(string nombre)
     {
         archivo.open(nombre);
         while (getline(archivo, cadena))
@@ -76,9 +86,13 @@ DB::DB()
    
 }
 void DB::NonbreColum(){
+    string nombres;
      for (int i = 0; i < Columnas; i++)
     {
+        nombres = DataB[0][i];
         ColumnasName[DataB[0][i]] = i;
+        
+        Columanss.push_back(nombres);
     }
 }
 long long DB::getFilas(){
@@ -124,6 +138,13 @@ void DB::IndexarColumna(string columna,int Id){
  }
  vector<Tree<string>> DB::GetVectorColumnas(){
      return ArbolesColumIN;
+ }
+
+ void DB::addFila(){
+    DataB.add(Menu.AddFilaM(Columanss));
+ }
+ void DB::addCOlunmasName(){
+     DataB.add(Menu.AddCOlumnas(Columanss,ColumnasName));
  }
 DB::~DB()
 {
