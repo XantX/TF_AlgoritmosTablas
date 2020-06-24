@@ -17,6 +17,7 @@ public:
     void add(T data);
     void ShowAll(function<void(T)>Print);
     long long getSize();
+
     T& operator[](long long val){
         return getPos(val);
     }

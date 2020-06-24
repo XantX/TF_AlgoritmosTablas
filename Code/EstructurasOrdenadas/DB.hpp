@@ -17,45 +17,77 @@ typedef ListaEnlazada<LS> LLS;
 class DB
 {
 private:
+    //Menu controlador
     ClassMenuDB Menu;
+    //Archivo de lectura
     ifstream archivo;
+    //Base de datos---tabla
     LLS DataB;
+    //
     string cadena;
+    //columnas y filas de la tabla
     long long Columnas;
     long long filas;
-
+    //nombre de las columnas con indice
     map<string,long long> ColumnasName;
+    //LLena los nombres de las columnas 
+    void NonbreColum();
+    //Solo nombre de las columnas en orden
     vector<string> Columanss;
-
+    //Arboles para indexar
     vector<Tree<LS>> ArbolesFilasIN;
     vector<Tree<string>> ArbolesColumIN;
     
-    void NonbreColum();
 public:
     DB();
+    //INdexaFilas
     void IndexarFila(string);
     void IndexarColumna(string, int);
-    void addFila();
-    void addCOlunmasName();
+    //Arreglos de arboles indexados
     vector<Tree<string>> GetVectorColumnas();
     vector<Tree<LS>> GetVectorFilas();
-    
-    map<string,long long> getMapa(){return ColumnasName;}
-    long long GetColSize(){
-        return DataB.getSize();
-    }
-    vector<string> getColumss(){
-        return Columanss;
-    }
-    LLS& GetDB(){
-        return DataB;
-    }
+    //Metodos para setar el nombre de las columnas y agregar una fila
+    void addFila();
+    void addCOlunmasName();
+    //retorna el nombre de las columnas
+    map<string,long long> getMapa();
+    vector<string> getColumss();
+    //retorna Toda la tabla
+    LLS& GetDB();
+    //Obtiene la cantidad de filas y columnas
     long long getFilas();
     long long getColumnas();
+    //Leer de un archivo CSV
+    void reading(string );
+    void divideField(istream &);
 
-    void reading(string nombre)
-    {
-        archivo.open(nombre);
+    ~DB();
+};
+
+DB::DB()
+{
+   
+}
+long long DB::getFilas(){
+    return filas;
+}
+long long DB::getColumnas(){
+    return Columnas;
+    
+}
+map<string,long long> DB::getMapa(){return ColumnasName;}
+
+vector<string> DB::getColumss(){
+    return Columanss;
+}
+LLS& DB::GetDB(){
+    return DataB;
+}
+vector<Tree<LS>> DB::GetVectorFilas(){
+     return ArbolesFilasIN;
+ }
+void DB::reading(string nombre){
+      archivo.open(nombre);
         while (getline(archivo, cadena))
         {
             stringstream ss(cadena);
@@ -65,25 +97,15 @@ public:
         filas = DataB.getSize();
         Columnas = DataB[0].getSize();
         NonbreColum();
-
-    }
-
-    void divideField(istream &registro){
-       ListaEnlazada<string>fila;
+}
+void DB::divideField(istream &registro){
+ListaEnlazada<string>fila;
         string tmp;
         while (getline(registro,tmp,';'))
         {
            fila.add(tmp);
         }
         DataB.add(fila);
-    }
-
-    ~DB();
-};
-
-DB::DB()
-{
-   
 }
 void DB::NonbreColum(){
     string nombres;
@@ -95,13 +117,17 @@ void DB::NonbreColum(){
         Columanss.push_back(nombres);
     }
 }
-long long DB::getFilas(){
-    return filas;
-}
-long long DB::getColumnas(){
-    return Columnas;
-    
-}
+ vector<Tree<string>> DB::GetVectorColumnas(){
+     return ArbolesColumIN;
+ }
+
+ void DB::addFila(){
+    DataB.add(Menu.AddFilaM(Columanss));
+ }
+ void DB::addCOlunmasName(){
+     DataB.add(Menu.AddCOlumnas(Columanss,ColumnasName));
+ }
+
 void DB::IndexarFila(string columna){
     if(ColumnasName.count(columna)){
         ColumnasName[columna];
@@ -133,19 +159,8 @@ void DB::IndexarColumna(string columna,int Id){
         cout<<"No existe esa columna";
     }
 }
- vector<Tree<LS>> DB::GetVectorFilas(){
-     return ArbolesFilasIN;
- }
- vector<Tree<string>> DB::GetVectorColumnas(){
-     return ArbolesColumIN;
- }
+ 
 
- void DB::addFila(){
-    DataB.add(Menu.AddFilaM(Columanss));
- }
- void DB::addCOlunmasName(){
-     DataB.add(Menu.AddCOlumnas(Columanss,ColumnasName));
- }
 DB::~DB()
 {
 }
