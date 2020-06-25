@@ -11,12 +11,15 @@
 #include <vector>
 #include <map>
 #include "ClassMenuDB.hpp"
+#include "Index.hpp"
 using namespace std;
 typedef ListaEnlazada<string> LS;
 typedef ListaEnlazada<LS> LLS;
 class DB
 {
 private:
+    //Menu de indexacion
+    Index Arboles;
     //Menu controlador
     ClassMenuDB Menu;
     //Archivo de lectura
@@ -34,18 +37,11 @@ private:
     void NonbreColum();
     //Solo nombre de las columnas en orden
     vector<string> Columanss;
-    //Arboles para indexar
-    vector<Tree<LS>> ArbolesFilasIN;
-    vector<Tree<string>> ArbolesColumIN;
+
+   
     
 public:
     DB();
-    //INdexaFilas
-    void IndexarFila(string);
-    void IndexarColumna(string, int);
-    //Arreglos de arboles indexados
-    vector<Tree<string>> GetVectorColumnas();
-    vector<Tree<LS>> GetVectorFilas();
     //Metodos para setar el nombre de las columnas y agregar una fila
     void addFila();
     void addCOlunmasName();
@@ -60,7 +56,10 @@ public:
     //Leer de un archivo CSV
     void reading(string );
     void divideField(istream &);
-
+    //INdexar
+    void INDEXAR();
+    //Retornar arreglo de arboles
+    vector<Tree<LS>> Getarboles();
     ~DB();
 };
 
@@ -83,9 +82,12 @@ vector<string> DB::getColumss(){
 LLS& DB::GetDB(){
     return DataB;
 }
-vector<Tree<LS>> DB::GetVectorFilas(){
-     return ArbolesFilasIN;
- }
+void DB::INDEXAR(){
+    Arboles.IndexarPorCriterioColumna(ColumnasName, DataB);
+}
+vector<Tree<LS>> DB::Getarboles(){
+    return Arboles.GetARREGLO();
+}
 void DB::reading(string nombre){
       archivo.open(nombre);
         while (getline(archivo, cadena))
@@ -117,9 +119,6 @@ void DB::NonbreColum(){
         Columanss.push_back(nombres);
     }
 }
- vector<Tree<string>> DB::GetVectorColumnas(){
-     return ArbolesColumIN;
- }
 
  void DB::addFila(){
     DataB.add(Menu.AddFilaM(Columanss));
@@ -127,39 +126,6 @@ void DB::NonbreColum(){
  void DB::addCOlunmasName(){
      DataB.add(Menu.AddCOlumnas(Columanss,ColumnasName));
  }
-
-void DB::IndexarFila(string columna){
-    if(ColumnasName.count(columna)){
-        ColumnasName[columna];
-        Tree<LS> ArbolesFIlas(columna);
-        ArbolesFIlas.setCriterio(CriterioMen);
-        ArbolesFIlas.setImpresion(ImpriLS);
-
-        Setcolum(ColumnasName[columna]);
-        for (long long i = 1; i <filas; i++)
-        {
-            ArbolesFIlas.Add(DataB[i]);
-        }
-        ArbolesFilasIN.push_back(ArbolesFIlas);
-    }else{
-        cout<<"No existe esa columna";
-    }
-}
-void DB::IndexarColumna(string columna,int Id){
-    if(ColumnasName.count(columna)){
-        Tree<string> ArbolColumna(DataB[Id][1]);
-        ArbolColumna.setCriterio(CriterioMenS);
-        ArbolColumna.setImpresion(printString);
-        for (long long i = 2; i <Columnas; i++)
-        {
-            ArbolColumna.Add(DataB[Id][i]);
-        }
-        ArbolesColumIN.push_back(ArbolColumna);
-    }else{
-        cout<<"No existe esa columna";
-    }
-}
- 
 
 DB::~DB()
 {

@@ -6,15 +6,11 @@
 typedef ListaEnlazada<string>* LSP;
 int main()
 {
-    map<string,function<bool(string,string)>> mapaDecriterios;
-    Tree<string> Arbolstrings("Prueba");
+    DB Database;
+    Database.reading("Archivos/Alumnos.csv");
 
-    mapaDecriterios["Criterio 1"] = CriterioMenS;
-    Arbolstrings.setCriterio(mapaDecriterios["Criterio 1"]);
-    Arbolstrings.setImpresion(printString);
-    Arbolstrings.Add("21");
-    Arbolstrings.Add("43");
-    Arbolstrings.Add("50");
-    Arbolstrings.InOrder();
+    Database.INDEXAR();
+
+    Database.Getarboles()[0].InOrder();
     return 0;
 }

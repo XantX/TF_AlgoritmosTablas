@@ -6,16 +6,15 @@ typedef ListaEnlazada<string> LS;
 typedef ListaEnlazada<LS> LLS;
 using namespace std;
 long long Column = 0;
-auto Setcolum = [](long long C){
+auto Setcolum = [&](long long C){
   Column = C;
 };
 auto printNum = [](int x){
   cout<<x;
 };
 auto printString = [](string x){
-  cout<<x<<" ";
+  cout<<x<<"\n";
 };
-
 auto CriterioMa = [&](LS Lista1, LS Lista2 ){
   long long l1 = stoll(Lista1[Column]);
   long long l2 = stoll(Lista2[Column]);
