@@ -13,7 +13,7 @@ auto printNum = [](int x){
   cout<<x;
 };
 auto printString = [](string x){
-  cout<<x<<"\n";
+  cout<<x<<" ";
 };
 auto CriterioMa = [&](LS Lista1, LS Lista2 ){
   long long l1 = stoll(Lista1[Column]);
@@ -53,5 +53,6 @@ auto CriterioMen = [&](LS Lista1, LS Lista2){
 };
 auto ImpriLS = [&](LS lista1){
   lista1.ShowAll(printString);
+  cout<<"\n";
 };
 #endif

@@ -43,6 +43,8 @@ void Index::SetCriterioTree(Tree<LS>& arbolito){
         {
         cout<<i.first<<endl;
         }
+        cout<<"Escriba el criterio:\n";
+        cout<<"----->";
         cin>>criterio;   
         cin.ignore();
     } while (!MapaDeCriterios.count(criterio));
