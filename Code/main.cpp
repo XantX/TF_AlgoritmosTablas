@@ -1,18 +1,16 @@
 #include "EstructurasOrdenadas/DB.hpp"
 #include "EstructurasOrdenadas/ClassManu.hpp"
 #include "EstructurasOrdenadas/criterios.hpp"
-
+#include "EstructurasOrdenadas/ListaEnlazada.hpp"
+#include <map>
+typedef ListaEnlazada<string>* LSP;
 int main()
 {
-    ClassMenu Menu;
-    DB database;
+    DB Database;
+    Database.reading("Archivos/Alumnos.csv");
 
-    database.addCOlunmasName();
+    Database.INDEXAR();
 
-    database.GetDB()[0].ShowAll(printString);
-
-    database.addFila();
-    
-    database.GetDB()[1].ShowAll(printString);
+    Database.Getarboles()[0].InOrder();
     return 0;
 }

@@ -6,7 +6,7 @@ typedef ListaEnlazada<string> LS;
 typedef ListaEnlazada<LS> LLS;
 using namespace std;
 long long Column = 0;
-auto Setcolum = [](long long C){
+auto Setcolum = [&](long long C){
   Column = C;
 };
 auto printNum = [](int x){
@@ -15,8 +15,7 @@ auto printNum = [](int x){
 auto printString = [](string x){
   cout<<x<<" ";
 };
-
-auto CriterioMa = [](LS Lista1, LS Lista2 ){
+auto CriterioMa = [&](LS Lista1, LS Lista2 ){
   long long l1 = stoll(Lista1[Column]);
   long long l2 = stoll(Lista2[Column]);
   if(l1 > l2){
@@ -25,7 +24,7 @@ auto CriterioMa = [](LS Lista1, LS Lista2 ){
     return false;
   }
 };
-auto CriterioMaS = [](string Lista1, string Lista2){
+auto CriterioMaS = [&](string Lista1, string Lista2){
   long long l1 = stoi(Lista1);
   long long l2 = stoi(Lista2);
   if(l1 > l2){
@@ -34,7 +33,7 @@ auto CriterioMaS = [](string Lista1, string Lista2){
     return false;
   }
 };
-auto CriterioMenS = [](string Lista1, string Lista2){
+auto CriterioMenS = [&](string Lista1, string Lista2){
   long long l1 = stoi(Lista1);
   long long l2 = stoi(Lista2);
   if(l1 < l2){
@@ -43,7 +42,7 @@ auto CriterioMenS = [](string Lista1, string Lista2){
     return false;
   }
 };
-auto CriterioMen = [](LS Lista1, LS Lista2){
+auto CriterioMen = [&](LS Lista1, LS Lista2){
   long long l1 = stoi(Lista1[Column]);
   long long l2 = stoi(Lista2[Column]);
   if(l1 < l2){
@@ -52,7 +51,8 @@ auto CriterioMen = [](LS Lista1, LS Lista2){
     return false;
   }
 };
-auto ImpriLS = [](LS lista1){
+auto ImpriLS = [&](LS lista1){
   lista1.ShowAll(printString);
+  cout<<"\n";
 };
 #endif

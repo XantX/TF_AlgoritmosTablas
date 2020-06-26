@@ -41,4 +41,4 @@ ClassMenu::~ClassMenu()
 
 
 
-#endif __MENU__HPP__
+#endif// __MENU__HPP__
