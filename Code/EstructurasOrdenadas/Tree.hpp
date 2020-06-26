@@ -90,7 +90,9 @@ void Tree<T>::setImpresion(function<void(T)> impresion){
     }
 }
 template<typename T>
+
 void Tree<T>::setCriterio(function<bool(T,T)> criterio){
+    //si el criterio de la clase esta vacio se iguala al pasado por parametro, caso contrario no, porque ya tendría un criterio
     if(this->criterio ==nullptr){
         this->criterio = criterio;
     }else{

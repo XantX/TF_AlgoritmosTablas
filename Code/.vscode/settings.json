@@ -1,5 +1,11 @@
 {
   "files.associations": {
-    "iostream": "cpp"
+    "iostream": "cpp",
+    "xtree": "cpp"
+  },
+  "workbench.colorCustomizations": {
+    "activityBar.background": "#5E0332",
+    "titleBar.activeBackground": "#840546",
+    "titleBar.activeForeground": "#FFFBFD"
   }
 }

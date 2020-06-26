@@ -41,6 +41,7 @@ void Index::SetCriterioTree(Tree<LS>& arbolito){
     {
         for (auto i : MapaDeCriterios)
         {
+        //imprime todos los criterios 
         cout<<i.first<<endl;
         }
         cout<<"Escriba el criterio:\n";
