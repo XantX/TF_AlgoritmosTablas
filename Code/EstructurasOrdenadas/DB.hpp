@@ -18,7 +18,7 @@ typedef ListaEnlazada<LS> LLS;
 class DB
 {
 private:
-    //Menu de indexacion
+    //Menu y metodos de indexacion
     Index Arboles;
     //Menu controlador
     ClassMenuDB Menu;
