@@ -57,10 +57,6 @@ public:
     //Obtiene la cantidad de filas y columnas
     long long getFilas();
     long long getColumnas();
-    //TODO: pribando filas
-    void setfilas(long long a);
-    void setcolumnas(long long a);
-    //TODO: aca termina
     //Leer de un archivo CSV
     void reading(string);
 
@@ -129,14 +125,6 @@ void DB::addCOlunmasName() {
 
 DB::~DB()
 {
-}
-
-//TODO: Probando filas y columnas
-void DB::setfilas(long long a) {
-    a = filas;
-}
-void DB::setcolumnas(long long a) {
-    a = Columnas;
 }
 
 
