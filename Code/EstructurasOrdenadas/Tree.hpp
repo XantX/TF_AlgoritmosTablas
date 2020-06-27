@@ -6,144 +6,208 @@
 #include <vector>
 using namespace std;
 
-template<typename T>
+template <typename T>
 class Tree
 {
 private:
-
-Nodo<T>* raiz;
-long long NodosNum;
-function<bool(T&,T&)> criterio;
-function<bool(T&,string)> criterio2;
-function<void(T)> impresion;
-string NameTree;
-string CriterioComparador;
-    void _add(T ,Nodo<T>*&);
-    void _inorder(Nodo<T>*);
-    void ReInorder(Nodo<T>*);
+    Nodo<T> *raiz;
+    long long NodosNum;
+    function<bool(T &, T &)> criterio;
+    function<bool(T &, string)> criterio2;
+    function<void(T)> impresion;
+    string NameTree;
+    string CriterioComparador;
+    void _add(T, Nodo<T> *&);
+    void _inorder(Nodo<T> *);
+    void ReInorder(Nodo<T> *);
     vector<T> INor;
+    void _findByData(Nodo<T> *, string s);
+
 public:
     Tree(string);
     ~Tree();
     void setImpresion(function<void(T)>);
-    void setCriterio(function<bool(T&,T&)>);
-    void setCriterio(function<bool(T&,string)>);
+    void setCriterio(function<bool(T &, T &)>);
+    void setCriterio(function<bool(T &, string)>);
     vector<T> RetornoInorder();
     string GetNameTrees();
     void InOrder();
-    bool Switcher(T&, T&);
+    bool Switcher(T &, T &);
     void Add(T);
 };
 //===============================================
-template<typename T>
-void Tree<T>::ReInorder(Nodo<T>* nodo){
-    if(nodo == nullptr){
+template <typename T>
+void Tree<T>::ReInorder(Nodo<T> *nodo)
+{
+    if (nodo == nullptr)
+    {
         return;
-    }else{
+    }
+    else
+    {
         ReInorder(nodo->Izq);
         INor.push_back(nodo->data);
         ReInorder(nodo->Der);
     }
-    
 }
-template<typename T>
-vector<T> Tree<T>::RetornoInorder(){
-    if(raiz != nullptr){
+template <typename T>
+vector<T> Tree<T>::RetornoInorder()
+{
+    if (raiz != nullptr)
+    {
         ReInorder(raiz);
-    }else{
-        cout<<"Arbol vacio";
+    }
+    else
+    {
+        cout << "Arbol vacio";
     }
     return INor;
 }
-template<typename T>
-Tree<T>::Tree(string Name){
+template <typename T>
+Tree<T>::Tree(string Name)
+{
     raiz = nullptr;
     NodosNum = 0;
     NameTree = Name;
 }
-template<typename T>
-void Tree<T>::Add(T data){
-    if(criterio == nullptr && criterio2 == nullptr){//cambiar
-        cout<<"ERROR:ADD:No se eligio un criterio"<<endl;
-    }else{
-        _add(data,raiz);
+template <typename T>
+void Tree<T>::Add(T data)
+{
+    if (criterio == nullptr && criterio2 == nullptr)
+    { //cambiar
+        cout << "ERROR:ADD:No se eligio un criterio" << endl;
+    }
+    else
+    {
+        _add(data, raiz);
     }
 }
-template<typename T>
-void Tree<T>::InOrder(){
-    if(impresion == nullptr) {
-        cout<<"ERROR:INORDER: no sea declarado un criterio de imprecion";
+template <typename T>
+void Tree<T>::InOrder()
+{
+    if (impresion == nullptr)
+    {
+        cout << "ERROR:INORDER: no sea declarado un criterio de imprecion";
         return;
     }
-    if(NodosNum == 0) cout<<"\nNo hay elementos para ver\n";
-    else _inorder(raiz);
+    if (NodosNum == 0)
+        cout << "\nNo hay elementos para ver\n";
+    else
+        _inorder(raiz);
 }
-template<typename T>
-string Tree<T>::GetNameTrees(){
+template <typename T>
+string Tree<T>::GetNameTrees()
+{
     return NameTree;
 }
-template<typename T>
-Tree<T>::~Tree(){
+template <typename T>
+Tree<T>::~Tree()
+{
 }
-template<typename T>
-void Tree<T>::setImpresion(function<void(T)> impresion){
-    if(this->impresion == nullptr){
+template <typename T>
+void Tree<T>::setImpresion(function<void(T)> impresion)
+{
+    if (this->impresion == nullptr)
+    {
         this->impresion = impresion;
-    }else{
-        cout<<"\nYa se asigno un criterio de impresion\n";
+    }
+    else
+    {
+        cout << "\nYa se asigno un criterio de impresion\n";
     }
 }
-template<typename T>
-void Tree<T>::setCriterio(function<bool(T&,T&)> criterioIN){
+template <typename T>
+void Tree<T>::setCriterio(function<bool(T &, T &)> criterioIN)
+{
     //si el criterio de la clase esta vacio se iguala al pasado por parametro, caso contrario no, porque ya tendría un criterio
-    if(this->criterio ==nullptr && this->criterio2 == nullptr){
+    if (this->criterio == nullptr && this->criterio2 == nullptr)
+    {
         this->criterio = criterioIN;
-    }else{
-        cout<<"Ya se agrego um criterio de indexacion";
     }
-    
+    else
+    {
+        cout << "Ya se agrego um criterio de indexacion";
+    }
 }
-template<typename T>
-void Tree<T>::setCriterio(function<bool(T&,string)> criterioIN){
+template <typename T>
+void Tree<T>::setCriterio(function<bool(T &, string)> criterioIN)
+{
     //si el criterio de la clase esta vacio se iguala al pasado por parametro, caso contrario no, porque ya tendría un criterio
-    if(this->criterio2 == nullptr && this->criterio == nullptr){
-        cout<<"Dime con que criterio se comparar:\n";
-        cin>>CriterioComparador;
+    if (this->criterio2 == nullptr && this->criterio == nullptr)
+    {
+        cout << "Dime con que criterio se comparar:\n";
+        cin >> CriterioComparador;
         this->criterio2 = criterioIN;
-    }else{
-        cout<<"Ya se agrego um criterio de indexacion";
     }
-    
+    else
+    {
+        cout << "Ya se agrego um criterio de indexacion";
+    }
 }
-template<typename T>
-void Tree<T>::_inorder(Nodo<T>* nodo){
-    if(nodo == nullptr){
+template <typename T>
+void Tree<T>::_inorder(Nodo<T> *nodo)
+{
+    if (nodo == nullptr)
+    {
         return;
-    }else{
+    }
+    else
+    {
         _inorder(nodo->Izq);
         impresion(nodo->data);
         _inorder(nodo->Der);
     }
 }
-template<typename T>
-bool Tree<T>::Switcher(T&LADD, T&LCOM){
-    if(criterio != nullptr){
+template <typename T>
+bool Tree<T>::Switcher(T &LADD, T &LCOM)
+{
+    if (criterio != nullptr)
+    {
         return criterio(LADD, LCOM);
-    }else if(criterio2 != nullptr){
-        return criterio2(LADD,CriterioComparador);
+    }
+    else if (criterio2 != nullptr)
+    {
+        return criterio2(LADD, CriterioComparador);
     }
 }
-template<typename T>
-void Tree<T>::_add(T data, Nodo<T>*& nodo){
-    Nodo<T>*nuevo =  new Nodo<T>(data);
-    if(nodo == nullptr){
+template <typename T>
+void Tree<T>::_add(T data, Nodo<T> *&nodo)
+{
+    Nodo<T> *nuevo = new Nodo<T>(data);
+    if (nodo == nullptr)
+    {
         nodo = nuevo;
         NodosNum++;
-    }else{
-        if(Switcher(data,nodo->data))//cambiar
-        _add(data,nodo->Izq);
+    }
+    else
+    {
+        if (Switcher(data, nodo->data)) //cambiar
+            _add(data, nodo->Izq);
         else
-        _add(data,nodo->Der);
+            _add(data, nodo->Der);
+    }
+}
+
+template <typename T>
+void Tree<T>::_findByData(Nodo<T> *nodo, string s)
+{
+    string IC;
+
+    IC = to_string(nodo->data);
+    if (Nodo == nullptr)
+        return;
+    else if (IC[0] == s[0]/*TODO: IC.find_first_of(s)==1*/)
+    {
+        impresion(nodo->data);
+        _findByData(nodo->Izq,s);
+    }
+    else if (s[0] > IC[0])
+    {
+         _findByData(nodo->Izq, s)
+    }
+    else
+    {
+         _findByData(nodo->Der, s);
     }
 }
 
