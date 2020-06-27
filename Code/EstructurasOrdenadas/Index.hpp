@@ -48,7 +48,7 @@ int Index::ElegirCriterios(){
         cout<<"Elige un tipo de criterio:\n";
         cout<<"1) CriteriosNumericos\n";
         cout<<"2) CriteriosStrings\n";
-        cout<<"Escriba la opcion";
+        cout<<"Escriba el numero de la opcion";
         cout<<"----->";
         cin>>opcion;
     } while (opcion <=0 || opcion > 2);
