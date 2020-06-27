@@ -4,13 +4,9 @@
 #include "EstructurasOrdenadas/ListaEnlazada.hpp"
 #include <map>
 typedef ListaEnlazada<string>* LSP;
+
 int main()
 {
-    DB Database;
-    Database.reading("Archivos/Alumnos.csv");
-
-    Database.INDEXAR();
-
-    Database.Getarboles()[0].InOrder();
+    
     return 0;
 }
