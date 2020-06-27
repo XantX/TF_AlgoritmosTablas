@@ -15,16 +15,8 @@ auto printNum = [](int x){
 auto printString = [](string x){
   cout<<x<<" ";
 };
-auto CriterioMa = [&](LS Lista1, LS Lista2 ){
-  long long l1 = stoll(Lista1[Column]);
-  long long l2 = stoll(Lista2[Column]);
-  if(l1 > l2){
-    return true;
-  }else{
-    return false;
-  }
-};
-auto CriterioMaS = [&](string Lista1, string Lista2){
+
+auto CriterioMaS = [](string Lista1, string Lista2){
   long long l1 = stoi(Lista1);
   long long l2 = stoi(Lista2);
   if(l1 > l2){
@@ -42,10 +34,26 @@ auto CriterioMenS = [&](string Lista1, string Lista2){
     return false;
   }
 };
-auto CriterioMen = [&](LS Lista1, LS Lista2){
+auto CriterioMen = [](LS& Lista1, LS& Lista2){
   long long l1 = stoi(Lista1[Column]);
   long long l2 = stoi(Lista2[Column]);
   if(l1 < l2){
+    return true;
+  }else{
+    return false;
+  }
+};
+auto CriterioMa = [](LS& Lista1, LS& Lista2 ){
+  long long l1 = stoll(Lista1[Column]);
+  long long l2 = stoll(Lista2[Column]);
+  if(l1 > l2){
+    return true;
+  }else{
+    return false;
+  }
+};
+auto IniciaCon = [](LS& Lista1, string Comparador){
+  if(Lista1[Column].find(Comparador) == 0){
     return true;
   }else{
     return false;

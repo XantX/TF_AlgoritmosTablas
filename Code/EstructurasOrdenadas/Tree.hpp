@@ -13,8 +13,8 @@ private:
 
 Nodo<T>* raiz;
 long long NodosNum;
-function<bool(T,T)> criterio;
-function<bool(T,string)> criterio2;
+function<bool(T&,T&)> criterio;
+function<bool(T&,string)> criterio2;
 function<void(T)> impresion;
 string NameTree;
 string CriterioComparador;
@@ -26,8 +26,8 @@ public:
     Tree(string);
     ~Tree();
     void setImpresion(function<void(T)>);
-    void setCriterio(function<bool(T,T)>);
-    void setCriterio(function<bool(T,string)>);
+    void setCriterio(function<bool(T&,T&)>);
+    void setCriterio(function<bool(T&,string)>);
     vector<T> RetornoInorder();
     string GetNameTrees();
     void InOrder();
@@ -94,22 +94,22 @@ void Tree<T>::setImpresion(function<void(T)> impresion){
     }
 }
 template<typename T>
-void Tree<T>::setCriterio(function<bool(T,T)> criterio){
+void Tree<T>::setCriterio(function<bool(T&,T&)> criterioIN){
     //si el criterio de la clase esta vacio se iguala al pasado por parametro, caso contrario no, porque ya tendría un criterio
     if(this->criterio ==nullptr && this->criterio2 == nullptr){
-        this->criterio = criterio;
+        this->criterio = criterioIN;
     }else{
         cout<<"Ya se agrego um criterio de indexacion";
     }
     
 }
 template<typename T>
-void Tree<T>::setCriterio(function<bool(T,string)> criterio){
+void Tree<T>::setCriterio(function<bool(T&,string)> criterioIN){
     //si el criterio de la clase esta vacio se iguala al pasado por parametro, caso contrario no, porque ya tendría un criterio
     if(this->criterio2 == nullptr && this->criterio == nullptr){
         cout<<"Dime con que criterio se comparar:\n";
         cin>>CriterioComparador;
-        this->criterio2 = criterio;
+        this->criterio2 = criterioIN;
     }else{
         cout<<"Ya se agrego um criterio de indexacion";
     }

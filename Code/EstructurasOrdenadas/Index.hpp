@@ -9,48 +9,95 @@
 #include <map>
 using namespace std;
 
-typedef function<bool(LS,LS)> Criterio;
+typedef function<bool(LS&,LS&)> Criterio;
+typedef function<bool(LS&,string)> Criteriostring;
 class Index
 {
 private:
 
     vector<Tree<LS>> ListaDeArboles;
     map<string,long long> IndiceDeArbol;
-    map<string, Criterio> MapaDeCriterios;
+    map<string, Criterio> MapaDeCriteriosNum;
+    map<string, Criteriostring> MapaDeCriteriosString;
 public:
     Index();
     ~Index();
     void IndexarPorCriterioColumna(map<string,long long>, LLS&);
     void SetCriterioTree(Tree<LS>&);
     void StarIndex(long long);
+    void VerCriterios(Tree<LS>&);
+    int ElegirCriterios();
     vector<Tree<LS>> GetARREGLO();
 };
 
 Index::Index()
 {
-    MapaDeCriterios["CriterioMayor"] = CriterioMa;
-    MapaDeCriterios["CriterioMenor"] = CriterioMen;
+    //criterios para numeros
+    MapaDeCriteriosNum["CriterioMayor"] = CriterioMa;
+    MapaDeCriteriosNum["CriterioMenor"] = CriterioMen;
+    //criterios para letras
+    MapaDeCriteriosString["ComienzaCon"] = IniciaCon;
 }
 vector<Tree<LS>> Index::GetARREGLO(){
     return ListaDeArboles;
 }
-void Index::SetCriterioTree(Tree<LS>& arbolito){
-    string criterio;
-    
+int Index::ElegirCriterios(){
+    int opcion;
     do
     {
-        for (auto i : MapaDeCriterios)
-        {
-        //imprime todos los criterios 
-        cout<<i.first<<endl;
-        }
-        cout<<"Escriba el criterio:\n";
+        cout<<"Elige un tipo de criterio:\n";
+        cout<<"1) CriteriosNumericos\n";
+        cout<<"2) CriteriosStrings\n";
+        cout<<"Escriba la opcion";
         cout<<"----->";
-        cin>>criterio;   
-        cin.ignore();
-    } while (!MapaDeCriterios.count(criterio));
-    arbolito.setCriterio(MapaDeCriterios[criterio]);
+        cin>>opcion;
+    } while (opcion <=0 || opcion > 2);
+    return opcion;
+}
+void Index::VerCriterios(Tree<LS>& arbol){
+    string criterio;
+    switch (ElegirCriterios())
+    {
+    case 1:
+        do
+        {
+            cout<<"Criterios:\n";
+            cout<<"\n";
+            for(auto i: MapaDeCriteriosNum){
+            cout<<i.first<<"\n";
+            }
+            cout<<"Escriba el criterio:\n";
+            cout<<"----->";
+            cin>>criterio;   
+            cin.ignore();
+        } while (!MapaDeCriteriosNum.count(criterio));
+
+        arbol.setCriterio(MapaDeCriteriosNum[criterio]);
+        break;
+    case 2:
+        
+        do
+        {
+            cout<<"Criterios:\n";
+            cout<<"\n";
+            for(auto e: MapaDeCriteriosString){
+            cout<<e.first<<"\n";
+            }
+            cout<<"Escriba el criterio:\n";
+            cout<<"----->";
+            cin>>criterio;   
+            cin.ignore(); 
+        } while (!MapaDeCriteriosString.count(criterio));
+        arbol.setCriterio(MapaDeCriteriosString[criterio]);
+        break;
+    default:
+        break;
+    }
+        
+}
+void Index::SetCriterioTree(Tree<LS>& arbolito){
     
+    VerCriterios(arbolito);
     arbolito.setImpresion(ImpriLS);
 }
 
