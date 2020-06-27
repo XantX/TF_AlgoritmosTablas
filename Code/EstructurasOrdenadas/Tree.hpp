@@ -4,6 +4,7 @@
 #include "Nodo.hpp"
 #include <functional>
 #include <vector>
+#include "criterios.hpp"
 using namespace std;
 
 template <typename T>
@@ -16,15 +17,16 @@ private:
     function<bool(T &, string)> criterio2;
     function<void(T)> impresion;
     string NameTree;
+    long long NameTreeLL;
     string CriterioComparador;
     void _add(T, Nodo<T> *&);
     void _inorder(Nodo<T> *);
     void ReInorder(Nodo<T> *);
     vector<T> INor;
     void _findByData(Nodo<T> *, string s);
-
+    bool Switcher(T &, T &);
 public:
-    Tree(string);
+    Tree(string, long long);
     ~Tree();
     void setImpresion(function<void(T)>);
     void setCriterio(function<bool(T &, T &)>);
@@ -32,7 +34,6 @@ public:
     vector<T> RetornoInorder();
     string GetNameTrees();
     void InOrder();
-    bool Switcher(T &, T &);
     void Add(T);
 };
 //===============================================
@@ -64,11 +65,12 @@ vector<T> Tree<T>::RetornoInorder()
     return INor;
 }
 template <typename T>
-Tree<T>::Tree(string Name)
+Tree<T>::Tree(string Name, long long NameLL)
 {
     raiz = nullptr;
     NodosNum = 0;
     NameTree = Name;
+    NameTreeLL = NameLL;
 }
 template <typename T>
 void Tree<T>::Add(T data)
@@ -161,6 +163,7 @@ void Tree<T>::_inorder(Nodo<T> *nodo)
 template <typename T>
 bool Tree<T>::Switcher(T &LADD, T &LCOM)
 {
+    Setcolum(NameTreeLL);
     if (criterio != nullptr)
     {
         return criterio(LADD, LCOM);

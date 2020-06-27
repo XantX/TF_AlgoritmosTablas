@@ -110,7 +110,7 @@ void Index::IndexarPorCriterioColumna(map<string,long long>NombresDeColumnas, LL
         cin.ignore();
     }while(!NombresDeColumnas.count(Columna));
 
-    Tree<LS> ArbolNuevo(Columna);
+    Tree<LS> ArbolNuevo(Columna, NombresDeColumnas[Columna]);
     cout<<"Dime el criterio con el que quiere indexar:\n";
     SetCriterioTree(ArbolNuevo);
     Setcolum(NombresDeColumnas[Columna]);
