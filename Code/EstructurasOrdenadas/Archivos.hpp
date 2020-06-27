@@ -4,7 +4,6 @@
 #include <fstream>
 #include<sstream>
 #include<string>
-#include "DB.hpp"
 #include "ListaEnlazada.hpp"
 
 using namespace std;
