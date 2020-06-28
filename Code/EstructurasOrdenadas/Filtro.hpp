@@ -29,6 +29,7 @@ void Filtro::ElegirFiltros(map<string,ArrTree> todo){
         }
         cin>>opcion;   
     } while (opcion<1 || opcion>2);
+    
     MenuF.dividirCriterios(opcion,Col,todo[Col][opcion-1].GetNameTrees(),todo);
 }
 Filtro::~Filtro()

@@ -1,6 +1,7 @@
 #ifndef __MENU__HPP__
 #define __MENU__HPP__
 #include <iostream>
+#include "DB.hpp"
 using namespace std;
 class ClassMenu
 {
@@ -9,29 +10,42 @@ private:
 public:
     ClassMenu();
     ~ClassMenu();
-    void Principal();
-    void Tabla();
+    int Principal();
+    int Tabla();
     
 };
 
 ClassMenu::ClassMenu()
 {
 }
-void ClassMenu::Tabla(){
- cout<<"\t\t\tTabla\n";
- cout<<"\t 1) Ordenar columna por\n";
- cout<<"\t 2) Ordenar por\n";
- cout<<"\t 3) Buscar\n";
- cout<<"\t 4) Exportar tabla a archivo";
- cout<<"\t\t Opcion-->";
-}
-void ClassMenu::Principal(){
-    cout<<"\t\t\tMenu Principal\n";
-    cout<<"\t 1) Crear Nueva Tabla\n";
-    cout<<"\t 2) Ingresar tabla de archivo\n";
-    cout<<"\t 3) Ver lista de tablas existentes\n";
-    cout<<"\t 4) Elegir una tabla\n";
+int ClassMenu::Tabla(){
+    int opcion;
+ do
+ {
+    cout<<"\t\t\tTabla\n";
+    cout<<"\t 1) Filtrar\n";
+    cout<<"\t 2) Exportar tabla a archivo\n";
+    cout<<"\t 3)Agregar Fila\n";
+    cout<<"\t 4)Salir de la tabla\n";
     cout<<"\t\t Opcion-->";
+    cin>>opcion;
+ } while (opcion < 1 || opcion > 4);
+ return opcion;
+}
+int ClassMenu::Principal(){
+     int opcion;
+    do
+    {
+        cout<<"\t\t\tMenu Principal\n";
+        cout<<"\t 1) Crear Nueva Tabla\n";
+        cout<<"\t 2) Importar tabla de archivo\n";
+        cout<<"\t 3) Ver lista de tablas existentes\n";
+        cout<<"\t 4) Elegir una tabla\n";
+        cout<<"\t 5) Salir\n";
+        cout<<"\t\t Opcion-->";
+        cin>>opcion;
+    } while (opcion < 1 || opcion > 5);
+    return opcion;
 }
 ClassMenu::~ClassMenu()
 {

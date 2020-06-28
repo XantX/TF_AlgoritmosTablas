@@ -2,16 +2,20 @@
 #include "EstructurasOrdenadas/ClassManu.hpp"
 #include "EstructurasOrdenadas/criterios.hpp"
 #include "EstructurasOrdenadas/ListaEnlazada.hpp"
+#include "EstructurasOrdenadas/TablasPrincipal.hpp"
 #include <map>
 //#include "EstructurasOrdenadas/Tree.hpp"
 
 int main()
 {  
-   DB Database;
-   Database.reading("Archivos/Alumnos.csv");
-   //Database.getarboles()[0].InOrder();
-   Database.FiltroView();
-
+   TablasPrincipal nuevas;
+   bool estado = true;
+   while (estado)
+   {
+      nuevas.principal(estado);   
+   }
+   
+   
    
    return 0;
 }

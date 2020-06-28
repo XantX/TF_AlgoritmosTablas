@@ -6,7 +6,8 @@
     "functional": "cpp",
     "vector": "cpp",
     "map": "cpp",
-    "string": "cpp"
+    "string": "cpp",
+    "iosfwd": "cpp"
   },
   "workbench.colorCustomizations": {
     "activityBar.background": "#5E0332",

@@ -2,6 +2,9 @@
 #define __EXPORT_HPP__
 #include <fstream>
 #include <string>
+#include "ListaEnlazada.hpp"
+typedef ListaEnlazada<string> LS;
+typedef ListaEnlazada<LS> LLS;
 using namespace std;
 template <class T>
 class Export
@@ -12,7 +15,10 @@ private:
     string spaces;
 
 public:
-    Export(string name)
+Export(string name,LLS& DataB){
+    
+}
+    _export(string name)
     {
 
         this->name = name;
