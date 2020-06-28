@@ -13,6 +13,7 @@
 #include <map>
 #include "ClassMenuDB.hpp"
 #include "Index.hpp"
+#include "Filtro.hpp"
 using namespace std;
 typedef ListaEnlazada<string> LS;
 typedef ListaEnlazada<LS> LLS;
@@ -21,7 +22,8 @@ class DB
 private:
     //Menu y metodos de indexacion
     Index Arboles;
- 
+    //Filtro
+    Filtro FiltrodeTAbla;
     //Menu controlador
     ClassMenuDB Menu;
     //Archivo de lectura
@@ -62,6 +64,8 @@ public:
     //Retornar arreglo de arboles
     ArrTree getarboles();
     map<string, ArrTree> getodo();
+    //filtro
+    void FiltroView();
     ~DB();
 };
 
@@ -75,6 +79,9 @@ long long DB::getFilas() {
 long long DB::getColumnas() {
     return Columnas;
 
+}
+void DB::FiltroView(){
+    FiltrodeTAbla.ElegirFiltros(Arboles.getAll());
 }
 ArrTree DB::getarboles(){
 return Arboles.getArboles();

@@ -15,6 +15,7 @@ private:
     long long NodosNum;
     function<bool(T &, T &)> criterio;
     function<bool(T &, string&)> criterio2;
+    function<bool(T &, string)> criterioB;
     function<void(T)> impresion;
     string NameTree;
     long long NameTreeLL;
@@ -31,10 +32,12 @@ public:
     void setImpresion(function<void(T)>);
     void setCriterio(function<bool(T&, T&)>);
     void setCriterio(function<bool(T &, string&)>);
+    void setCriterioB(function<bool(T& , string)>);
     vector<T> RetornoInorder();
     string GetNameTrees();
     void InOrder();
     void Add(T);
+    void Find(string);
 };
 //===============================================
 template <typename T>
@@ -190,28 +193,32 @@ void Tree<T>::_add(T data, Nodo<T> *&nodo)
             _add(data, nodo->Der);
     }
 }
-
-/*template <typename T>
+template<typename T>
+ void Tree<T>::setCriterioB(function<bool(T&,string)> criterioBu){
+     if(this->criterioB == nullptr){
+         this->criterioB = criterioBu;
+     }else{
+         cout<<"ERROR:TREE:Ya existe un criterio de busque";
+     }
+}
+template<typename T>
+void Tree<T>::Find(string criter){
+    _findByData(raiz,criter);
+}
+template <typename T>
 void Tree<T>::_findByData(Nodo<T> *nodo, string s)
 {
-    string IC;
-
-    IC = to_string(nodo->data);
-    if (Nodo == nullptr)
+    Setcolum(NameTreeLL);
+    if(nodo == nullptr){
+        cout<<"Se termino la busqueda";
         return;
-    else if (IC[0] == s[0])
-    {
-        impresion(nodo->data);
+    }
+    
+    if(criterioB(nodo->data,s)){
         _findByData(nodo->Izq,s);
+    }else{
+        _findByData(nodo->Der,s);
     }
-    else if (s[0] > IC[0])
-    {
-         _findByData(nodo->Izq, s)
-    }
-    else
-    {
-         _findByData(nodo->Der, s);
-    }
-}*/
+}
 
 #endif

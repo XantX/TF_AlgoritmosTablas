@@ -6,13 +6,10 @@
 //#include "EstructurasOrdenadas/Tree.hpp"
 
 int main()
-{
-    
-    DB database;
-    database.reading("Archivos/Alumnos.csv");
-
-    database.addFila();
-
-    database.getarboles()[0].InOrder();
-    return 0;
+{  
+   DB Database;
+   Database.reading("Archivos/Alumnos.csv");
+   //Database.getarboles()[0].InOrder();
+   Database.FiltroView();
+   return 0;
 }

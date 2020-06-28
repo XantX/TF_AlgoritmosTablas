@@ -7,6 +7,7 @@
 #include "criterios.hpp"
 #include <string>
 #include <map>
+#include "CriteriosDeBusqueda.hpp"
 using namespace std;
 
 typedef function<bool(LS&,LS&)> Criterio;
@@ -46,6 +47,7 @@ Index::Index()
 
 ArrTree Index::getArboles(){
     string C;
+    cin.ignore();
     cout<<"De que columna:\n";
     getline(cin,C);
     return MapaDeArbolXColumnas[C];
@@ -68,12 +70,14 @@ void Index::creacionDeArboles(string name, long long number){
     int opcion = setNumberOrStrings(name);
     if(opcion == 1){
         vector<Tree<LS>> NumMayoryMenor;
-        Tree<LS> NuevoMa(name, number);
+        Tree<LS> NuevoMa("Mayor", number);
         NuevoMa.setCriterio(CriterioMa);
         NuevoMa.setImpresion(ImpriLS);
-        Tree<LS> NuevoMe(name, number);
+        NuevoMa.setCriterioB(CriteriBMayor);
+        Tree<LS> NuevoMe("Menor", number);
         NuevoMe.setCriterio(CriterioMen);
         NuevoMe.setImpresion(ImpriLS);
+        NuevoMe.setCriterioB(CriteriBMenor);
         
        NumMayoryMenor.push_back(NuevoMa);
        NumMayoryMenor.push_back(NuevoMe);
@@ -81,13 +85,14 @@ void Index::creacionDeArboles(string name, long long number){
 
     }else if(opcion == 2){
        ArrTree AlphaINIyFIN;
-        Tree<LS> NuevoINI(name, number);
+        Tree<LS> NuevoINI("Ini", number);
         NuevoINI.setCriterio(AlphebeticoINI);
         NuevoINI.setImpresion(ImpriLS);
-        
-        Tree<LS> NuevoFIN(name, number);
+        NuevoINI.setCriterioB(CriterioBAlphaIni);
+        Tree<LS> NuevoFIN("Fin", number);
         NuevoFIN.setCriterio(AlphebeticoFIN);
         NuevoFIN.setImpresion(ImpriLS);
+        NuevoFIN.setCriterioB(CriterioBAlphaFIN);
 
         AlphaINIyFIN.push_back(NuevoINI);
         AlphaINIyFIN.push_back(NuevoFIN);

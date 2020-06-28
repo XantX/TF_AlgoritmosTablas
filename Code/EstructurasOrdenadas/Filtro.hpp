@@ -3,22 +3,14 @@
 #include<iostream>
 #include <vector>
 #include "Tree.hpp"
-
+#include "MenuFiltros.hpp"
 using namespace std;
-
-typedef vector<Tree<LS>>& ArrTree;
 class Filtro
 {
 private:
-
+    MenuFiltros MenuF;
 public:
-    void mayor();
-    void menor();
-    void igual_a();
-    void inicia_con();
-    void Finaliza_con();
-    void EstaContenidoEn();
-    void NoEstaContenidoEn();
+    void ElegirFiltros(map<string,ArrTree>);
     Filtro();
     ~Filtro();
 };
@@ -26,7 +18,23 @@ public:
 Filtro::Filtro()
 {
 }
-
+void Filtro::ElegirFiltros(map<string,ArrTree> todo){
+    string Col = MenuF.elegirColumna(todo);
+    int opcion;
+    do
+    {
+        for (long long i = 0; i < todo[Col].size() ; i++)
+        {
+        cout<<i+1<<") "<<todo[Col][i].GetNameTrees()<<"\n"; 
+        }
+        cin>>opcion;   
+    } while (opcion<1 || opcion>2);
+    string criter;
+    cin.ignore();
+    cout<<"Dime el criterio:";
+    getline(cin,criter);
+    todo[Col][opcion - 1].Find(criter);
+}
 Filtro::~Filtro()
 {
 }
