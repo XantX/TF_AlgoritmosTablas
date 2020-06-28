@@ -85,11 +85,11 @@ void Index::creacionDeArboles(string name, long long number){
 
     }else if(opcion == 2){
        ArrTree AlphaINIyFIN;
-        Tree<LS> NuevoINI("Ini", number);
+        Tree<LS> NuevoINI("IniCon", number);
         NuevoINI.setCriterio(AlphebeticoINI);
         NuevoINI.setImpresion(ImpriLS);
         NuevoINI.setCriterioB(CriterioBAlphaIni);
-        Tree<LS> NuevoFIN("Fin", number);
+        Tree<LS> NuevoFIN("FinCon", number);
         NuevoFIN.setCriterio(AlphebeticoFIN);
         NuevoFIN.setImpresion(ImpriLS);
         NuevoFIN.setCriterioB(CriterioBAlphaFIN);

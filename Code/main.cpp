@@ -11,5 +11,7 @@ int main()
    Database.reading("Archivos/Alumnos.csv");
    //Database.getarboles()[0].InOrder();
    Database.FiltroView();
+
+   
    return 0;
 }

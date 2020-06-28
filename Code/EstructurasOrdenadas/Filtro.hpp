@@ -29,11 +29,7 @@ void Filtro::ElegirFiltros(map<string,ArrTree> todo){
         }
         cin>>opcion;   
     } while (opcion<1 || opcion>2);
-    string criter;
-    cin.ignore();
-    cout<<"Dime el criterio:";
-    getline(cin,criter);
-    todo[Col][opcion - 1].Find(criter);
+    MenuF.dividirCriterios(opcion,Col,todo[Col][opcion-1].GetNameTrees(),todo);
 }
 Filtro::~Filtro()
 {

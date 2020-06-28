@@ -6,23 +6,26 @@ typedef ListaEnlazada<string> LS;
 auto CriteriBMayor = [](LS& Lista1, string crite){
     long long Lis1 = stoll(Lista1[Column]);
     long long CriterioCom = stoll(crite);
-
+    if(Lis1 == CriterioCom){
+        Lista1.ShowAll(printString);
+        cout<<"\n";
+    }
     if(CriterioCom > Lis1){
         return true;
     }else{
-        Lista1.ShowAll(printString);
         return false;
     }
 };
 auto CriteriBMenor = [](LS& Lista1, string crite){
     long long Lis1 = stoll(Lista1[Column]);
     long long CriterioCom = stoll(crite);
-    if(CriterioCom >= Lis1){
+    if(Lis1 == CriterioCom){
         Lista1.ShowAll(printString);
         cout<<"\n";
+    }
+    if(CriterioCom < Lis1){
         return true;
     }else{
-        
         return false;
     }
 };
