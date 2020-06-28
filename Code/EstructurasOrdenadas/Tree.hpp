@@ -14,7 +14,7 @@ private:
     Nodo<T> *raiz;
     long long NodosNum;
     function<bool(T &, T &)> criterio;
-    function<bool(T &, string)> criterio2;
+    function<bool(T &, string&)> criterio2;
     function<void(T)> impresion;
     string NameTree;
     long long NameTreeLL;
@@ -24,13 +24,13 @@ private:
     void ReInorder(Nodo<T> *);
     vector<T> INor;
     void _findByData(Nodo<T> *, string s);
-    bool Switcher(T &, T &);
+    bool Switcher(T, T);
 public:
     Tree(string, long long);
     ~Tree();
     void setImpresion(function<void(T)>);
-    void setCriterio(function<bool(T &, T &)>);
-    void setCriterio(function<bool(T &, string)>);
+    void setCriterio(function<bool(T&, T&)>);
+    void setCriterio(function<bool(T &, string&)>);
     vector<T> RetornoInorder();
     string GetNameTrees();
     void InOrder();
@@ -119,7 +119,7 @@ void Tree<T>::setImpresion(function<void(T)> impresion)
     }
 }
 template <typename T>
-void Tree<T>::setCriterio(function<bool(T &, T &)> criterioIN)
+void Tree<T>::setCriterio(function<bool(T&, T&)> criterioIN)
 {
     //si el criterio de la clase esta vacio se iguala al pasado por parametro, caso contrario no, porque ya tendría un criterio
     if (this->criterio == nullptr && this->criterio2 == nullptr)
@@ -132,7 +132,7 @@ void Tree<T>::setCriterio(function<bool(T &, T &)> criterioIN)
     }
 }
 template <typename T>
-void Tree<T>::setCriterio(function<bool(T &, string)> criterioIN)
+void Tree<T>::setCriterio(function<bool(T &, string&)> criterioIN)
 {
     //si el criterio de la clase esta vacio se iguala al pasado por parametro, caso contrario no, porque ya tendría un criterio
     if (this->criterio2 == nullptr && this->criterio == nullptr)
@@ -161,7 +161,7 @@ void Tree<T>::_inorder(Nodo<T> *nodo)
     }
 }
 template <typename T>
-bool Tree<T>::Switcher(T &LADD, T &LCOM)
+bool Tree<T>::Switcher(T LADD, T LCOM)
 {
     Setcolum(NameTreeLL);
     if (criterio != nullptr)
@@ -191,7 +191,7 @@ void Tree<T>::_add(T data, Nodo<T> *&nodo)
     }
 }
 
-template <typename T>
+/*template <typename T>
 void Tree<T>::_findByData(Nodo<T> *nodo, string s)
 {
     string IC;
@@ -199,7 +199,7 @@ void Tree<T>::_findByData(Nodo<T> *nodo, string s)
     IC = to_string(nodo->data);
     if (Nodo == nullptr)
         return;
-    else if (IC[0] == s[0]/*TODO: IC.find_first_of(s)==1*/)
+    else if (IC[0] == s[0])
     {
         impresion(nodo->data);
         _findByData(nodo->Izq,s);
@@ -212,6 +212,6 @@ void Tree<T>::_findByData(Nodo<T> *nodo, string s)
     {
          _findByData(nodo->Der, s);
     }
-}
+}*/
 
 #endif

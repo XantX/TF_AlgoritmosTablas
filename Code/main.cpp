@@ -3,16 +3,15 @@
 #include "EstructurasOrdenadas/criterios.hpp"
 #include "EstructurasOrdenadas/ListaEnlazada.hpp"
 #include <map>
-
+//#include "EstructurasOrdenadas/Tree.hpp"
 
 int main()
 {
-    DB Database;
-
-    Database.reading("Archivos/Alumnos.csv");
-
-    Database.INDEXAR();
-
-    Database.Getarboles()[0].InOrder();
+    
+    DB database;
+    database.reading("Archivos/Alumnos.csv");
+    
+    database.getarboles()[1].InOrder();
+    
     return 0;
 }

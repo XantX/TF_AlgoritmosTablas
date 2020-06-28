@@ -59,11 +59,9 @@ public:
     long long getColumnas();
     //Leer de un archivo CSV
     void reading(string);
-
-    //INdexar
-    void INDEXAR();
     //Retornar arreglo de arboles
-    vector<Tree<LS>> Getarboles();
+    ArrTree getarboles();
+    map<string, ArrTree> getodo();
     ~DB();
 };
 
@@ -78,7 +76,12 @@ long long DB::getColumnas() {
     return Columnas;
 
 }
-
+ArrTree DB::getarboles(){
+return Arboles.getArboles();
+}
+map<string, ArrTree> DB::getodo(){
+    return Arboles.getAll();
+}
 map<string, long long> DB::getMapa() { return ColumnasName; }
 
 vector<string> DB::getColumss() {
@@ -87,18 +90,11 @@ vector<string> DB::getColumss() {
 LLS& DB::GetDB() {
     return DataB;
 }
-void DB::INDEXAR() {
-    Arboles.IndexarPorCriterioColumna(ColumnasName, DataB);
-}
-vector<Tree<LS>> DB::Getarboles() {
-    return Arboles.GetARREGLO();
-}
-
 
 
 void DB::reading(string nombre){
  
-    fichero.reading(nombre, DataB);
+    fichero.reading(nombre, DataB,Arboles);
 
     filas = DataB.getSize();
     Columnas = DataB[0].getSize();

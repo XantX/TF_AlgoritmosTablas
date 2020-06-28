@@ -3,7 +3,9 @@
     "iostream": "cpp",
     "xtree": "cpp",
     "xstring": "cpp",
-    "functional": "cpp"
+    "functional": "cpp",
+    "vector": "cpp",
+    "map": "cpp"
   },
   "workbench.colorCustomizations": {
     "activityBar.background": "#5E0332",
