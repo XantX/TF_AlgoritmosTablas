@@ -113,10 +113,10 @@ void DB::NonbreColum() {
 }
 
 void DB::addFila() {
-    DataB.add(Menu.AddFilaM(Columanss));
+    DataB.add(Menu.AddFilaM(Columanss,Arboles));
 }
 void DB::addCOlunmasName() {
-    DataB.add(Menu.AddCOlumnas(Columanss, ColumnasName));
+    DataB.add(Menu.AddCOlumnas(Columanss, ColumnasName,Arboles));
 }
 
 DB::~DB()

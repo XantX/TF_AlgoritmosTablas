@@ -47,7 +47,7 @@ Index::Index()
 ArrTree Index::getArboles(){
     string C;
     cout<<"De que columna:\n";
-    cin>>C;
+    getline(cin,C);
     return MapaDeArbolXColumnas[C];
 }
 map<string, ArrTree> Index::getAll(){
@@ -84,6 +84,7 @@ void Index::creacionDeArboles(string name, long long number){
         Tree<LS> NuevoINI(name, number);
         NuevoINI.setCriterio(AlphebeticoINI);
         NuevoINI.setImpresion(ImpriLS);
+        
         Tree<LS> NuevoFIN(name, number);
         NuevoFIN.setCriterio(AlphebeticoFIN);
         NuevoFIN.setImpresion(ImpriLS);

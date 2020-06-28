@@ -5,7 +5,8 @@
     "xstring": "cpp",
     "functional": "cpp",
     "vector": "cpp",
-    "map": "cpp"
+    "map": "cpp",
+    "string": "cpp"
   },
   "workbench.colorCustomizations": {
     "activityBar.background": "#5E0332",

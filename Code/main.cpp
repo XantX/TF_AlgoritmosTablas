@@ -10,8 +10,9 @@ int main()
     
     DB database;
     database.reading("Archivos/Alumnos.csv");
-    
-    database.getarboles()[1].InOrder();
-    
+
+    database.addFila();
+
+    database.getarboles()[0].InOrder();
     return 0;
 }
