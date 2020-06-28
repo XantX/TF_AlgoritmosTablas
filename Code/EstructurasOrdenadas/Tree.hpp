@@ -26,6 +26,11 @@ private:
     vector<T> INor;
     void _findByData(Nodo<T> *, string s);
     bool Switcher(T, T);
+    void rotarDer(Nodo<T> *&);
+    void rotarIzq(Nodo<T> *&);
+    int _AlturaIzq(Nodo<T>*);
+    int _AlturaDer(Nodo<T>*);
+    void _balanceo(Nodo<T>*&);
 public:
     Tree(string, long long);
     ~Tree();
@@ -184,6 +189,7 @@ void Tree<T>::_add(T data, Nodo<T> *&nodo)
     {
         nodo = nuevo;
         NodosNum++;
+        
     }
     else
     {
@@ -192,6 +198,65 @@ void Tree<T>::_add(T data, Nodo<T> *&nodo)
         else
             _add(data, nodo->Der);
     }
+    _balanceo(nodo);
+}
+template<typename T>
+void Tree<T>::rotarDer(Nodo<T>*& nodo){
+    Nodo<T>*aux=nodo->Izq;
+    nodo->Izq=aux->Der;
+    aux->Der=nodo;
+    nodo=aux;
+}
+template<typename T>
+void Tree<T>::rotarIzq(Nodo<T>*& nodo){
+    Nodo<T>*aux=nodo->Der;
+    nodo->Der=aux->Izq;
+    aux->Izq=nodo;
+    nodo=aux;
+}
+template<typename T>
+int Tree<T>::_AlturaDer(Nodo<T>* nodo){
+    if(nodo == nullptr){
+        return 0;
+      }
+      return _AlturaDer(nodo->Der)+1;
+}
+template<typename T>
+int Tree<T>::_AlturaIzq(Nodo<T>* nodo){
+    if(nodo == nullptr){
+        return 0;
+      }
+      return _AlturaIzq(nodo->Izq)+1;
+}
+template<typename T>
+void Tree<T>::_balanceo(Nodo<T>*&nodo){
+    if(nodo==nullptr){
+    return;
+  }
+       int alturader = _AlturaDer(nodo);
+       int alturaizq = _AlturaIzq(nodo);
+       int fb=alturader-alturaizq;
+     if(fb>1){
+         
+       alturader = _AlturaDer(nodo->Der);
+       alturaizq = _AlturaIzq(nodo->Der);
+       if(alturaizq>alturader){
+         rotarDer(nodo->Der);
+       }
+       rotarIzq(nodo);
+     }
+     if(fb<-1){
+       
+        alturader = _AlturaDer(nodo->Izq);
+        alturaizq = _AlturaIzq(nodo->Izq);
+       if(alturaizq<alturader){
+         rotarIzq(nodo->Izq);
+       }
+       rotarDer(nodo);
+     }
+     _balanceo(nodo->Der);
+     _balanceo(nodo->Izq);
+     
 }
 template<typename T>
  void Tree<T>::setCriterioB(function<bool(T&,string)> criterioBu){
