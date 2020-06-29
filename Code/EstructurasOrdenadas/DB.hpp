@@ -13,15 +13,21 @@
 #include <map>
 #include "ClassMenuDB.hpp"
 #include "Index.hpp"
+#include "Filtro.hpp"
+#include "Export.hpp"
 using namespace std;
 typedef ListaEnlazada<string> LS;
 typedef ListaEnlazada<LS> LLS;
 class DB
 {
 private:
+    string TablaName;
+    //Export
+    Export Exportar;
     //Menu y metodos de indexacion
     Index Arboles;
- 
+    //Filtro
+    Filtro FiltrodeTAbla;
     //Menu controlador
     ClassMenuDB Menu;
     //Archivo de lectura
@@ -44,7 +50,7 @@ private:
 
 
 public:
-    DB();
+    DB(string);
     //Metodos para setar el nombre de las columnas y agregar una fila
     void addFila();
     void addCOlunmasName();
@@ -59,17 +65,27 @@ public:
     long long getColumnas();
     //Leer de un archivo CSV
     void reading(string);
-
-    //INdexar
-    void INDEXAR();
     //Retornar arreglo de arboles
-    vector<Tree<LS>> Getarboles();
+    ArrTree getarboles();
+    map<string, ArrTree> getodo();
+    //filtro
+    void FiltroView();
+    //retornarNOmbre
+    string getNameTabla();
+    void ExportarOn();
     ~DB();
 };
 
-DB::DB()
+DB::DB(string name)
 {
+    this->TablaName = name;
+}
+string DB::getNameTabla(){
+    return TablaName;
+}
 
+void DB::ExportarOn(){
+    Exportar.exportOn(TablaName,DataB);
 }
 long long DB::getFilas() {
     return filas;
@@ -78,7 +94,15 @@ long long DB::getColumnas() {
     return Columnas;
 
 }
-
+void DB::FiltroView(){
+    FiltrodeTAbla.ElegirFiltros(Arboles.getAll());
+}
+ArrTree DB::getarboles(){
+return Arboles.getArboles();
+}
+map<string, ArrTree> DB::getodo(){
+    return Arboles.getAll();
+}
 map<string, long long> DB::getMapa() { return ColumnasName; }
 
 vector<string> DB::getColumss() {
@@ -87,18 +111,11 @@ vector<string> DB::getColumss() {
 LLS& DB::GetDB() {
     return DataB;
 }
-void DB::INDEXAR() {
-    Arboles.IndexarPorCriterioColumna(ColumnasName, DataB);
-}
-vector<Tree<LS>> DB::Getarboles() {
-    return Arboles.GetARREGLO();
-}
-
 
 
 void DB::reading(string nombre){
  
-    fichero.reading(nombre, DataB);
+    fichero.reading(nombre, DataB,Arboles);
 
     filas = DataB.getSize();
     Columnas = DataB[0].getSize();
@@ -117,10 +134,10 @@ void DB::NonbreColum() {
 }
 
 void DB::addFila() {
-    DataB.add(Menu.AddFilaM(Columanss));
+    DataB.add(Menu.AddFilaM(Columanss,Arboles));
 }
 void DB::addCOlunmasName() {
-    DataB.add(Menu.AddCOlumnas(Columanss, ColumnasName));
+    DataB.add(Menu.AddCOlumnas(Columanss, ColumnasName,Arboles));
 }
 
 DB::~DB()

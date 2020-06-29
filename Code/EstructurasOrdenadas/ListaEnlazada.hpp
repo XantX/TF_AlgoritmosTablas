@@ -7,10 +7,10 @@ template<typename T>
 class ListaEnlazada
 {
 private:
-    Nodo<T>*fin;
     long long Size;
     T& getPos(long long pos);
 public:
+    Nodo<T>*fin;
     Nodo<T>*inicio;
     ListaEnlazada();
     ~ListaEnlazada();
@@ -21,6 +21,7 @@ public:
     T& operator[](long long val){
         return getPos(val);
     }
+    
 };
 template<typename T>
 ListaEnlazada<T>::ListaEnlazada()

@@ -7,27 +7,32 @@
 #include "criterios.hpp"
 #include <string>
 #include <map>
+#include "CriteriosDeBusqueda.hpp"
 using namespace std;
 
 typedef function<bool(LS&,LS&)> Criterio;
 typedef function<bool(LS&,string)> Criteriostring;
+typedef vector<Tree<LS>> ArrTree;
 class Index
 {
 private:
 
-    vector<Tree<LS>> ListaDeArboles;
-    map<string,long long> IndiceDeArbol;
+    
+    
     map<string, Criterio> MapaDeCriteriosNum;
-    map<string, Criteriostring> MapaDeCriteriosString;
+    map<string, Criterio> MapaDeCriteriosString;
+
+    map<string, ArrTree> MapaDeArbolXColumnas;
+
 public:
     Index();
     ~Index();
-    void IndexarPorCriterioColumna(map<string,long long>, LLS&);
-    void SetCriterioTree(Tree<LS>&);
-    void StarIndex(long long);
-    void VerCriterios(Tree<LS>&);
-    int ElegirCriterios();
-    vector<Tree<LS>> GetARREGLO();
+    void IndexarColumnas(LS&);
+    void update(LS&);
+    int setNumberOrStrings(string);
+    void creacionDeArboles(string,long long);
+    ArrTree getArboles();
+    map<string, ArrTree> getAll();
 };
 
 Index::Index()
@@ -36,89 +41,85 @@ Index::Index()
     MapaDeCriteriosNum["CriterioMayor"] = CriterioMa;
     MapaDeCriteriosNum["CriterioMenor"] = CriterioMen;
     //criterios para letras
-    MapaDeCriteriosString["ComienzaCon"] = IniciaCon;
+    MapaDeCriteriosString["ComienzaCon"] = AlphebeticoINI;
+    MapaDeCriteriosString["TerminaCon"] = AlphebeticoFIN;
 }
-vector<Tree<LS>> Index::GetARREGLO(){
-    return ListaDeArboles;
+
+ArrTree Index::getArboles(){
+    string C;
+    cin.ignore();
+    do
+    {
+        cout<<"De que columna:\n";
+        getline(cin,C);
+    } while(!MapaDeArbolXColumnas.count(C));
+    return MapaDeArbolXColumnas[C];
 }
-int Index::ElegirCriterios(){
+map<string, ArrTree> Index::getAll(){
+    return MapaDeArbolXColumnas;
+}
+int Index::setNumberOrStrings(string nombre){
     int opcion;
     do
     {
-        cout<<"Elige un tipo de criterio:\n";
-        cout<<"1) CriteriosNumericos\n";
-        cout<<"2) CriteriosStrings\n";
-        cout<<"Escriba el numero de la opcion";
-        cout<<"----->";
+        cout<<"La columna "<<nombre<<" es:\n";
+        cout<<"1) Numerico\n";
+        cout<<"2) palabras\n";
         cin>>opcion;
-    } while (opcion <=0 || opcion > 2);
+    } while (opcion <=0 || opcion >2);
     return opcion;
 }
-void Index::VerCriterios(Tree<LS>& arbol){
-    string criterio;
-    switch (ElegirCriterios())
-    {
-    case 1:
-        do
-        {
-            cout<<"Criterios:\n";
-            cout<<"\n";
-            for(auto i: MapaDeCriteriosNum){
-            cout<<i.first<<"\n";
-            }
-            cout<<"Escriba el criterio:\n";
-            cout<<"----->";
-            cin>>criterio;   
-            cin.ignore();
-        } while (!MapaDeCriteriosNum.count(criterio));
+void Index::creacionDeArboles(string name, long long number){
+    int opcion = setNumberOrStrings(name);
+    if(opcion == 1){
+        vector<Tree<LS>> NumMayoryMenor;
+        Tree<LS> NuevoMa("Mayor", number);
+        NuevoMa.setCriterio(CriterioMa);
+        NuevoMa.setImpresion(ImpriLS);
+        NuevoMa.setCriterioB(CriteriBMayor);
+        Tree<LS> NuevoMe("Menor", number);
+        NuevoMe.setCriterio(CriterioMen);
+        NuevoMe.setImpresion(ImpriLS);
+        NuevoMe.setCriterioB(CriteriBMenor);
+        
+       NumMayoryMenor.push_back(NuevoMa);
+       NumMayoryMenor.push_back(NuevoMe);
+       MapaDeArbolXColumnas[name] = NumMayoryMenor;
 
-        arbol.setCriterio(MapaDeCriteriosNum[criterio]);
-        break;
-    case 2:
-        
-        do
-        {
-            cout<<"Criterios:\n";
-            cout<<"\n";
-            for(auto e: MapaDeCriteriosString){
-            cout<<e.first<<"\n";
-            }
-            cout<<"Escriba el criterio:\n";
-            cout<<"----->";
-            cin>>criterio;   
-            cin.ignore(); 
-        } while (!MapaDeCriteriosString.count(criterio));
-        arbol.setCriterio(MapaDeCriteriosString[criterio]);
-        break;
-    default:
-        break;
+    }else if(opcion == 2){
+       ArrTree AlphaINIyFIN;
+        Tree<LS> NuevoINI("IniCon", number);
+        NuevoINI.setCriterio(AlphebeticoINI);
+        NuevoINI.setImpresion(ImpriLS);
+        NuevoINI.setCriterioB(CriterioBAlphaIni);
+        Tree<LS> NuevoFIN("FinCon", number);
+        NuevoFIN.setCriterio(AlphebeticoFIN);
+        NuevoFIN.setImpresion(ImpriLS);
+        NuevoFIN.setCriterioB(CriterioBAlphaFIN);
+
+        AlphaINIyFIN.push_back(NuevoINI);
+        AlphaINIyFIN.push_back(NuevoFIN);
+        MapaDeArbolXColumnas[name] = AlphaINIyFIN;
+
     }
-        
 }
-void Index::SetCriterioTree(Tree<LS>& arbolito){
+void Index::update(LS& ListaAINdex){
     
-    VerCriterios(arbolito);
-    arbolito.setImpresion(ImpriLS);
-}
-
-void Index::IndexarPorCriterioColumna(map<string,long long>NombresDeColumnas, LLS& DataB){
-    string Columna;
-    do{//Existe esa columna?
-        
-        cout<<"Dime la columna por la que quiere indexar:";
-        cin>>Columna;
-        cin.ignore();
-    }while(!NombresDeColumnas.count(Columna));
-
-    Tree<LS> ArbolNuevo(Columna);
-    cout<<"Dime el criterio con el que quiere indexar:\n";
-    SetCriterioTree(ArbolNuevo);
-    Setcolum(NombresDeColumnas[Columna]);
-    for (long long i = 1; i < DataB.getSize(); i++)
+    for (auto &i : MapaDeArbolXColumnas)
     {
-        ArbolNuevo.Add(DataB[i]);
+        for (long long j = 0; j < i.second.size(); j++)
+        {
+            i.second[j].Add(ListaAINdex);
+        }
     }
-    ListaDeArboles.push_back(ArbolNuevo);
+    
+}
+void Index::IndexarColumnas(LS& NombresDeColumnas){
+    string nombre;
+    for(long long i = 0; i < NombresDeColumnas.getSize();i++){
+       nombre = NombresDeColumnas[i];
+       creacionDeArboles(nombre,i);
+    }
 }
 
 Index::~Index()
