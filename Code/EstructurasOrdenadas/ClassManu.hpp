@@ -11,18 +11,20 @@ public:
     ClassMenu();
     ~ClassMenu();
     int Principal();
-    int Tabla();
+    int Tabla(DB*&);
     
 };
 
 ClassMenu::ClassMenu()
 {
 }
-int ClassMenu::Tabla(){
+int ClassMenu::Tabla(DB*& Tabla){
     int opcion;
  do
  {
      system("cls");
+    cout<<"\n";
+    cout<<"Tabla: "<<Tabla->getNameTabla()<<"\n";
     cout<<"\n";
     cout<<"\t 1) Filtrar\n";
     cout<<"\t 2) Exportar tabla a archivo\n";

@@ -14,13 +14,16 @@ void Tablamove::MenuTabla(DB*& Tabla,ClassMenu MenuT){
 bool Condi = true;
 while (Condi)
 {
-    cout<<"\n";
-    cout<<"Tabla: "<<Tabla->getNameTabla()<<"\n";
-    int opc = MenuT.Tabla();
+    
+    int opc = MenuT.Tabla(Tabla);
     switch (opc)
     {
         case 1:
         Tabla->FiltroView();
+        cout<<"\n";
+        cout<<"Presione cualquier tecla para continuar";
+        cin.ignore();
+        cin.ignore();
         break;
         case 2:
         //export

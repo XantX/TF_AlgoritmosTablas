@@ -56,11 +56,15 @@ void TablasPrincipal::ImportTabla(){
     Tablas[Archivo] = TablaNueva;
 }
 void TablasPrincipal::Vertablas(){
+    
+    
     cout<<"Las tablas que hay son:\n";
     for (auto &i : Tablas)
     {
         cout<<i.first<<"\n";
     }
+    cout<<"Presiones cualquier tecla para continuar";
+    
 }
  void TablasPrincipal::elegirTabla(){
      Vertablas();
@@ -93,6 +97,8 @@ void TablasPrincipal::principal(bool& estado){
         break;
     case 3:
         Vertablas();
+        cin.ignore();
+        cin.ignore();
         break;
     case 4:
         elegirTabla();
