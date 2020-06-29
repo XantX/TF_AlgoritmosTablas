@@ -7,19 +7,21 @@ template<typename T>
 class ListaEnlazada
 {
 private:
-    Nodo<T>*fin;
     long long Size;
     T& getPos(long long pos);
 public:
+    Nodo<T>*fin;
     Nodo<T>*inicio;
     ListaEnlazada();
     ~ListaEnlazada();
     void add(T data);
     void ShowAll(function<void(T)>Print);
     long long getSize();
+
     T& operator[](long long val){
         return getPos(val);
     }
+    
 };
 template<typename T>
 ListaEnlazada<T>::ListaEnlazada()
@@ -40,7 +42,7 @@ T& ListaEnlazada<T>::getPos(long long pos){
     return aux->data;
 }
 template<typename T>
-void ListaEnlazada<T>::add(T data){
+void ListaEnlazada<T>::add(T data){ //agrega al final
     Nodo<T> *nuevo = new Nodo<T>(data);
     if(Size == 0){
         inicio = fin = nuevo;

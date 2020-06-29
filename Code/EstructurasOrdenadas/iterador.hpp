@@ -7,24 +7,26 @@ using namespace std;
 //Solo para la lista en lazada
 template<typename T>
 class iterador
-{
+{//sobrecarga de operadores
 private:
 
     long long pos;
     ListaEnlazada<T> lista;
 public:
     Nodo<T>* it;
-    iterador(ListaEnlazada<T> &lista){
+    iterador(){
+        
+    }
+    void setLista(ListaEnlazada<T> &lista){
         this->lista = lista;
         it = this-> lista.inicio;
-        pos = 0;
     }
     ~iterador(){
     }
     void operator++(int i){
         if(it->Der != nullptr){it = it->Der;
         }else{
-        cout<<"ERROR:OverRange";
+        cout<<"ERROR:OverRange";//error
         }
     }
     void operator--(int i){

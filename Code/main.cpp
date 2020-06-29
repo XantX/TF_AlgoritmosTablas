@@ -1,13 +1,19 @@
-#include "Estructuras/MiniDB.h"
-#include "Menu/ClassManu.hpp"
+#include "EstructurasOrdenadas/DB.hpp"
+#include "EstructurasOrdenadas/ClassManu.hpp"
+#include "EstructurasOrdenadas/criterios.hpp"
+#include "EstructurasOrdenadas/ListaEnlazada.hpp"
+#include "EstructurasOrdenadas/TablasPrincipal.hpp"
+#include <string>
+
+#include <map>
 
 int main()
-{
-    ClassMenu Menu;
-    MiniDB dbupc;
-    //dbupc.reading("Archivos/covid.csv", 's');
-    //dbupc.ShowValues();
-    Menu.Principal();
-    Menu.Tabla();
-    return 0;
+{  
+   TablasPrincipal nuevas;
+   bool estado = true;
+   while (estado)
+   {
+      nuevas.principal(estado);   
+   }
+   return 0;
 }

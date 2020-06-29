@@ -1,0 +1,2 @@
+Id,Nombre,Nota
+1,Pepito,20
