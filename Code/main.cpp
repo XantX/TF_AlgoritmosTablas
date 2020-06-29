@@ -6,7 +6,6 @@
 #include <string>
 
 #include <map>
-//#include "EstructurasOrdenadas/Tree.hpp"
 
 int main()
 {  
@@ -16,6 +15,5 @@ int main()
    {
       nuevas.principal(estado);   
    }
-   
    return 0;
 }

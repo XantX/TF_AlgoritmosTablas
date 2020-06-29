@@ -22,10 +22,11 @@ int ClassMenu::Tabla(){
     int opcion;
  do
  {
+    cout<<"\n";
     cout<<"\t 1) Filtrar\n";
     cout<<"\t 2) Exportar tabla a archivo\n";
-    cout<<"\t 3)Agregar Fila\n";
-    cout<<"\t 4)Salir de la tabla\n";
+    cout<<"\t 3) Agregar Fila\n";
+    cout<<"\t 4) Salir de la tabla\n";
     cout<<"\t\t Opcion-->";
     cin>>opcion;
  } while (opcion < 1 || opcion > 4);
@@ -35,6 +36,7 @@ int ClassMenu::Principal(){
      int opcion;
     do
     {
+        cout<<"\n";
         cout<<"\t\t\tMenu Principal\n";
         cout<<"\t 1) Crear Nueva Tabla\n";
         cout<<"\t 2) Importar tabla de archivo\n";

@@ -66,14 +66,20 @@ void TablasPrincipal::Vertablas(){
      Vertablas();
      string NombreTabla;
      cin.ignore();
-     do
-     {
+     if(Tablas.empty()){
+         cout<<"No hay tablas para elegir\n";
+     }else{
+         do
+        {
          cout<<"Cual de las tablas quiere elegir\n";
          cout<<"Escriba el nombre de la tabla:\n";
          cout<<"------>";
          getline(cin,NombreTabla);
-     } while (!Tablas.count(NombreTabla));
+        } while (!Tablas.count(NombreTabla));
+
      TablaMenu.MenuTabla(Tablas[NombreTabla],MenuPrincipal);
+     }
+     
 }
 void TablasPrincipal::principal(bool& estado){
     int opcion = MenuPrincipal.Principal();
