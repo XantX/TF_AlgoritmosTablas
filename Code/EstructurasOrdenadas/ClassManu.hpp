@@ -22,6 +22,7 @@ int ClassMenu::Tabla(){
     int opcion;
  do
  {
+     system("cls");
     cout<<"\n";
     cout<<"\t 1) Filtrar\n";
     cout<<"\t 2) Exportar tabla a archivo\n";
@@ -36,6 +37,7 @@ int ClassMenu::Principal(){
      int opcion;
     do
     {
+        system("cls");
         cout<<"\n";
         cout<<"\t\t\tMenu Principal\n";
         cout<<"\t 1) Crear Nueva Tabla\n";
