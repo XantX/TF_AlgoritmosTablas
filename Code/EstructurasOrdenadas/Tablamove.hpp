@@ -14,6 +14,7 @@ void Tablamove::MenuTabla(DB*& Tabla,ClassMenu MenuT){
 bool Condi = true;
 while (Condi)
 {
+    cout<<"\n";
     cout<<"Tabla: "<<Tabla->getNameTabla()<<"\n";
     int opc = MenuT.Tabla();
     switch (opc)

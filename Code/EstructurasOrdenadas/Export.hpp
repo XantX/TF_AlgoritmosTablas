@@ -28,10 +28,10 @@ public:
         for (long long i = 0; i < DataB.getSize(); i++)
         {
             it2.setLista(it.it->data);
-            for (long long i = 0; i < DataB[0].getSize(); i++)
+            for (long long j = 0; j < DataB[0].getSize(); j++)
             {
                 Archivo<< it2.it->data;
-                if(i<DataB[0].getSize()-1){
+                if(j<DataB[0].getSize()-1){
                     Archivo<<separador;
                 }
                 it2++;

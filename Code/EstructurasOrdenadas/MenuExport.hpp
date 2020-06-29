@@ -34,14 +34,14 @@ string MenuExport::separador(int opc){
 }
 string MenuExport::pedirSeparadordecampos(string extenc){
     int opc;
-    cin.ignore();
     do
     {
        cout<<"Elige un separador de campos para la extencion\n";
        cout<<"--->"<<extenc<<"\n";
        cout<<"1) \";\" ";
        cout<<"2) \" \" ";
-       cout<<"3) \",\"";
+       cout<<"3) \",\"\n";
+       cout<<"---->";
        cin>>opc; 
     } while (opc < 1 || opc > 3);
     return separador(opc);
