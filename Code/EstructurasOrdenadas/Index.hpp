@@ -78,11 +78,11 @@ void Index::creacionDeArboles(string name, long long number){
         //TODO: uno ordena el abrol con criterio mayor y otro con el menor
         //TODO: con el objetivo de que se muestre de mayor a menor o a revez
         vector<Tree<LS>> NumMayoryMenor;
-        Tree<LS> NuevoMa("Mayor", number);
+        Tree<LS> NuevoMa("Ordenamiento Mayor", number);
         NuevoMa.setCriterio(CriterioMa);
         NuevoMa.setImpresion(ImpriLS);
         NuevoMa.setCriterioB(CriteriBMayor);
-        Tree<LS> NuevoMe("Menor", number);
+        Tree<LS> NuevoMe("Ordenamiento Menor", number);
         NuevoMe.setCriterio(CriterioMen);
         NuevoMe.setImpresion(ImpriLS);
         NuevoMe.setCriterioB(CriteriBMenor);
@@ -95,11 +95,11 @@ void Index::creacionDeArboles(string name, long long number){
         //TODO: ordena con inicia con y finaliza con 
         //TODO: a la hora de mostrar muestra inicia con o finaliza con 
        ArrTree AlphaINIyFIN;
-        Tree<LS> NuevoINI("IniCon", number);
+        Tree<LS> NuevoINI("Inicia Con", number);
         NuevoINI.setCriterio(AlphebeticoINI);
         NuevoINI.setImpresion(ImpriLS);
         NuevoINI.setCriterioB(CriterioBAlphaIni);
-        Tree<LS> NuevoFIN("FinCon", number);
+        Tree<LS> NuevoFIN("Finaliza Con", number);
         NuevoFIN.setCriterio(AlphebeticoFIN);
         NuevoFIN.setImpresion(ImpriLS);
         NuevoFIN.setCriterioB(CriterioBAlphaFIN);

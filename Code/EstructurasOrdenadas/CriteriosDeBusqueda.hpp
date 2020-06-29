@@ -34,6 +34,7 @@ auto CriterioBAlphaIni = [](LS& Lista1, string crite){
     int Letra2 = crite[0];
     if(Letra1 == Letra2){
         Lista1.ShowAll(printString);
+        cout<<"\n";
     }
     if(Letra1 > Letra2){
         return true;
@@ -48,6 +49,7 @@ auto CriterioBAlphaFIN = [](LS& Lista1, string crite){
     int Letra2 = crite[0];
     if(Letra1 == Letra2){
         Lista1.ShowAll(printString);
+        cout<<"\n";
     }
     if(Letra1 > Letra2){
         
