@@ -25,13 +25,13 @@ LS ClassMenuDB::AddFilaM(vector<string> &filasName,Index& inde){
     string Dato;
     LS NUEVAFILA;
     cin.ignore();
-    for (long long i = 0; i < filasName.size(); i++)
+    for (long long i = 0; i < filasName.size(); i++)//ingresa los datos
     {
         cout<<"Ingrese el dato de la columna "<<filasName[i]<<":"<<endl;
         getline(cin,Dato);
         NUEVAFILA.add(Dato);
     }
-    inde.update(NUEVAFILA);
+    inde.update(NUEVAFILA);//se agrega 
     return NUEVAFILA;
 }
 LS ClassMenuDB::AddCOlumnas(vector<string>& Names, map<string,long long>& NameAIndice,Index&indexador){

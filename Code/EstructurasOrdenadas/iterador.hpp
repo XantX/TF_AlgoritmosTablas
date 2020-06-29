@@ -7,7 +7,7 @@ using namespace std;
 //Solo para la lista en lazada
 template<typename T>
 class iterador
-{
+{//sobrecarga de operadores
 private:
 
     long long pos;

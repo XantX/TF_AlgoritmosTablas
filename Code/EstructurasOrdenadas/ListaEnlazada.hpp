@@ -42,7 +42,7 @@ T& ListaEnlazada<T>::getPos(long long pos){
     return aux->data;
 }
 template<typename T>
-void ListaEnlazada<T>::add(T data){
+void ListaEnlazada<T>::add(T data){ //agrega al final
     Nodo<T> *nuevo = new Nodo<T>(data);
     if(Size == 0){
         inicio = fin = nuevo;

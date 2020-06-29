@@ -74,7 +74,7 @@ auto CriterioMa = [](LS& Lista1, LS& Lista2 ){
   }
 };
 auto IniciaCon = [](LS& Lista1, string Comparador){
-  if(Lista1[Column].find(Comparador) == 0){
+  if(Lista1[Column].find(Comparador) == 0){//devuelve el valor donde encuentra la coincidencia 
     return true;
   }else{
     return false;

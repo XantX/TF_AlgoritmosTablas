@@ -24,10 +24,11 @@ public:
     void exportOn(string name,LLS& DataB){
         nombreArch(name);
         Archivo.open("Archivos/"+ArchNameComplete,ios::trunc);
-        it.setLista(DataB);
+        //trunc: significa que cuando se abre el archivo, el contenido antiguo se elimina inmediatamente.
+        it.setLista(DataB);//la establesco para poder usar los operadores sobrecargados
         for (long long i = 0; i < DataB.getSize(); i++)
         {
-            it2.setLista(it.it->data);
+            it2.setLista(it.it->data);//establesco otro iterador para usar los operadores, uno para la fila y otro para columnas
             for (long long j = 0; j < DataB[0].getSize(); j++)
             {
                 Archivo<< it2.it->data;
@@ -43,13 +44,13 @@ public:
         Archivo.close();
     }
     void nombreArch(string name){
-        if(_Format(name)){
-            extencion = name.substr(name.find(".") + 1);
-            separador = opcions.pedirSeparadordecampos(extencion);
+        if(_Format(name)){//si se sabe a que formato exportar
+            extencion = name.substr(name.find(".") + 1);//estrae lo que etsa despues del .
+            separador = opcions.pedirSeparadordecampos(extencion);//pide tipo de separador
             ArchNameComplete = name;
         }else{
-            extencion = opcions.pedirExtencion();
-            separador = opcions.pedirSeparadordecampos(extencion);
+            extencion = opcions.pedirExtencion();//le pido que dijite una extension
+            separador = opcions.pedirSeparadordecampos(extencion);//le pido que dijiste tipo de seprador
             ArchNameComplete = name + "." + extencion;
         }
     }

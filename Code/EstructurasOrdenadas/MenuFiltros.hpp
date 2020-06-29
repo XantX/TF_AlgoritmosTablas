@@ -45,9 +45,9 @@ int MenuFiltros::opcionesDeNumeros(){
 void MenuFiltros::dividirCriterios(int op, string cCol,string criterio,map<string,ArrTree> todo){
     if(criterio == "Mayor"){
         int OpcM = opcionesDeNumeros();
-        if(OpcM == 1){
+        if(OpcM == 1){//si pone "listar segun criterio"
             todo[cCol][op - 1].InOrder();
-        }else{
+        }else{//caso contrario deberá buscar todas las concurrencias 
             string criter;
             cin.ignore();
             cout<<"Dime que criterio debo buscar:";

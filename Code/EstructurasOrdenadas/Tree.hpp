@@ -12,13 +12,13 @@ class Tree
 {
 private:
     Nodo<T> *raiz;
-    long long NodosNum;
-    function<bool(T &, T &)> criterio;
-    function<bool(T &, string&)> criterio2;
-    function<bool(T &, string)> criterioB;
-    function<void(T)> impresion;
-    string NameTree;
-    long long NameTreeLL;
+    long long NodosNum; //numero de nodos
+    function<bool(T &, T &)> criterio; //criterio para hacer la insercion
+    function<bool(T &, string&)> criterio2; //criterio para hacer la inserion
+    function<bool(T &, string)> criterioB; //criterio para hacer la busqueda
+    function<void(T)> impresion; //criterio para hacer la impresion
+    string NameTree; //nombre del arbol
+    long long NameTreeLL; //numero de la columna con l auqe esta indexado el arbol
     string CriterioComparador;
     void _add(T, Nodo<T> *&);
     void _inorder(Nodo<T> *);
@@ -46,7 +46,7 @@ public:
 };
 //===============================================
 template <typename T>
-void Tree<T>::ReInorder(Nodo<T> *nodo)
+void Tree<T>::ReInorder(Nodo<T> *nodo)//agrega de forma ENORDEN a un vector
 {
     if (nodo == nullptr)
     {
@@ -73,7 +73,7 @@ vector<T> Tree<T>::RetornoInorder()
     return INor;
 }
 template <typename T>
-Tree<T>::Tree(string Name, long long NameLL)
+Tree<T>::Tree(string Name, long long NameLL)//se le pasa el nombre del arbol y la columna a la que esta indexado
 {
     raiz = nullptr;
     NodosNum = 0;
@@ -83,7 +83,7 @@ Tree<T>::Tree(string Name, long long NameLL)
 template <typename T>
 void Tree<T>::Add(T data)
 {
-    if (criterio == nullptr && criterio2 == nullptr)
+    if (criterio == nullptr && criterio2 == nullptr)//no se puede añadir porque no tiene criterio establecido
     { //cambiar
         cout << "ERROR:ADD:No se eligio un criterio" << endl;
     }
@@ -115,7 +115,7 @@ Tree<T>::~Tree()
 {
 }
 template <typename T>
-void Tree<T>::setImpresion(function<void(T)> impresion)
+void Tree<T>::setImpresion(function<void(T)> impresion)//establece el criterio de impresion
 {
     if (this->impresion == nullptr)
     {
@@ -169,8 +169,10 @@ void Tree<T>::_inorder(Nodo<T> *nodo)
     }
 }
 template <typename T>
-bool Tree<T>::Switcher(T LADD, T LCOM)
+bool Tree<T>::Switcher(T LADD, T LCOM)//funcion para designar si el nodo que se agrega va hacia la derecha o hacia la izquierda
 {
+    //solo se establece un criterio, depende del criterhio que tenga algun valor 
+    //si retorna uno o el otro
     Setcolum(NameTreeLL);
     if (criterio != nullptr)
     {
@@ -259,7 +261,7 @@ void Tree<T>::_balanceo(Nodo<T>*&nodo){
      
 }
 template<typename T>
- void Tree<T>::setCriterioB(function<bool(T&,string)> criterioBu){
+ void Tree<T>::setCriterioB(function<bool(T&,string)> criterioBu){//establece criterio de busqueda 
      if(this->criterioB == nullptr){
          this->criterioB = criterioBu;
      }else{

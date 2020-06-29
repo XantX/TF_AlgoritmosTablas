@@ -27,7 +27,7 @@ void Filtro::ElegirFiltros(map<string,ArrTree> todo){
         cout<<"Escriba el numero de la opcion:\n";
         for (long long i = 0; i < todo[Col].size() ; i++)
         {
-        cout<<i+1<<") "<<todo[Col][i].GetNameTrees()<<"\n"; 
+        cout<<i+1<<") "<<todo[Col][i].GetNameTrees()<<"\n"; //imprime el arreglo de arboles, su nombre y indice
         }
         cout<<"------>";
         cin>>opcion;   

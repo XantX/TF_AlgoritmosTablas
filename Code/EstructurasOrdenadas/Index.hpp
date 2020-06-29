@@ -13,7 +13,7 @@ using namespace std;
 typedef function<bool(LS&,LS&)> Criterio;
 typedef function<bool(LS&,string)> Criteriostring;
 typedef vector<Tree<LS>> ArrTree;
-class Index
+class Index //TODO: esta clase tiene los arboles para hacer lo filtros y tal. Indexa la tabla por diferentes criterios
 {
 private:
 
@@ -45,7 +45,7 @@ Index::Index()
     MapaDeCriteriosString["TerminaCon"] = AlphebeticoFIN;
 }
 
-ArrTree Index::getArboles(){
+ArrTree Index::getArboles(){ //retorna el arbol de la columna cuyo nombre pide 
     string C;
     cin.ignore();
     do
@@ -55,10 +55,10 @@ ArrTree Index::getArboles(){
     } while(!MapaDeArbolXColumnas.count(C));
     return MapaDeArbolXColumnas[C];
 }
-map<string, ArrTree> Index::getAll(){
+map<string, ArrTree> Index::getAll(){//retorna todos los arboles con el mismo nombre
     return MapaDeArbolXColumnas;
 }
-int Index::setNumberOrStrings(string nombre){
+int Index::setNumberOrStrings(string nombre){//funcion para establecer si el dato es de tipo entero o string
     int opcion;
     cout<<"\tCriterios para indexar\n";
     do
@@ -75,6 +75,8 @@ int Index::setNumberOrStrings(string nombre){
 void Index::creacionDeArboles(string name, long long number){
     int opcion = setNumberOrStrings(name);
     if(opcion == 1){
+        //TODO: uno ordena el abrol con criterio mayor y otro con el menor
+        //TODO: con el objetivo de que se muestre de mayor a menor o a revez
         vector<Tree<LS>> NumMayoryMenor;
         Tree<LS> NuevoMa("Mayor", number);
         NuevoMa.setCriterio(CriterioMa);
@@ -90,6 +92,8 @@ void Index::creacionDeArboles(string name, long long number){
        MapaDeArbolXColumnas[name] = NumMayoryMenor;
 
     }else if(opcion == 2){
+        //TODO: ordena con inicia con y finaliza con 
+        //TODO: a la hora de mostrar muestra inicia con o finaliza con 
        ArrTree AlphaINIyFIN;
         Tree<LS> NuevoINI("IniCon", number);
         NuevoINI.setCriterio(AlphebeticoINI);
@@ -106,7 +110,7 @@ void Index::creacionDeArboles(string name, long long number){
 
     }
 }
-void Index::update(LS& ListaAINdex){
+void Index::update(LS& ListaAINdex){//indexa lista al arbol
     
     for (auto &i : MapaDeArbolXColumnas)
     {
@@ -120,8 +124,8 @@ void Index::update(LS& ListaAINdex){
 void Index::IndexarColumnas(LS& NombresDeColumnas){
     string nombre;
     for(long long i = 0; i < NombresDeColumnas.getSize();i++){
-       nombre = NombresDeColumnas[i];
-       creacionDeArboles(nombre,i);
+       nombre = NombresDeColumnas[i];//obtiene el valor de la lista, empezando desde e principio 
+       creacionDeArboles(nombre,i);//crea arboles
     }
 }
 

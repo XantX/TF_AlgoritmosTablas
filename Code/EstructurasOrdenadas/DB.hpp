@@ -19,7 +19,7 @@ using namespace std;
 typedef ListaEnlazada<string> LS;
 typedef ListaEnlazada<LS> LLS;
 class DB
-{
+{//TODO: la clase DB es la tabla en si 
 private:
     string TablaName;
     //Export
@@ -96,6 +96,7 @@ long long DB::getColumnas() {
 }
 void DB::FiltroView(){
     FiltrodeTAbla.ElegirFiltros(Arboles.getAll());
+    //la variable Arboles es de index
 }
 ArrTree DB::getarboles(){
 return Arboles.getArboles();
@@ -126,13 +127,13 @@ void DB::NonbreColum() {
     string nombres;
     for (int i = 0; i < Columnas; i++)
     {
-        nombres = DataB[0][i];
+        nombres = DataB[0][i];//el nombre = abezera del archivo
         ColumnasName[DataB[0][i]] = i;
 
         Columanss.push_back(nombres);
     }
 }
-
+//TODO: DataB es de tipo LLS
 void DB::addFila() {
     DataB.add(Menu.AddFilaM(Columanss,Arboles));
 }
