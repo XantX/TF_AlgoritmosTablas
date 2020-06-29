@@ -50,7 +50,7 @@ void MenuFiltros::dividirCriterios(int op, string cCol,string criterio,map<strin
         }else{
             string criter;
             cin.ignore();
-            cout<<"Dime el criterio:";
+            cout<<"Dime que criterio debo buscar:";
             getline(cin,criter);
             todo[cCol][op - 1].Find(criter);
         }
@@ -61,14 +61,14 @@ void MenuFiltros::dividirCriterios(int op, string cCol,string criterio,map<strin
         }else{
             string criter;
             cin.ignore();
-            cout<<"Dime el criterio:";
+            cout<<"Dime que criterio debo buscar:";
             getline(cin,criter);
             todo[cCol][op - 1].Find(criter);
         }
     }else{
         string criter;
         cin.ignore();
-        cout<<"Dime con que criterio inicia:";
+        cout<<"Dime que caracter debo buscar:";
         getline(cin,criter);
         todo[cCol][op - 1].Find(criter);
     }

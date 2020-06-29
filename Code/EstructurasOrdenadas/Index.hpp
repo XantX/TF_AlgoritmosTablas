@@ -60,11 +60,14 @@ map<string, ArrTree> Index::getAll(){
 }
 int Index::setNumberOrStrings(string nombre){
     int opcion;
+    cout<<"\tCriterios para indexar\n";
     do
     {
         cout<<"La columna "<<nombre<<" es:\n";
+        cout<<"Escriba el numero de la opcion\n";
         cout<<"1) Numerico\n";
         cout<<"2) palabras\n";
+        cout<<"---->";
         cin>>opcion;
     } while (opcion <=0 || opcion >2);
     return opcion;
