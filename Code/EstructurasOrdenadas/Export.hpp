@@ -3,76 +3,67 @@
 #include <fstream>
 #include <string>
 #include "ListaEnlazada.hpp"
+#include "MenuExport.hpp"
+#include "iterador.hpp"
 typedef ListaEnlazada<string> LS;
 typedef ListaEnlazada<LS> LLS;
 using namespace std;
-template <class T>
+
 class Export
 {
 private:
-    string name;
-    string ExtensionType;
-    string spaces;
-
+    MenuExport opcions;
+    ofstream Archivo;
+    string ArchNameComplete;
+    string extencion;
+    string separador;
+    iterador<LS> it;
+    iterador<string> it2;
 public:
-Export(string name,LLS& DataB){
+    Export(){}
+    void exportOn(string name,LLS& DataB){
+        nombreArch(name);
+        Archivo.open("Archivos/"+ArchNameComplete,ios::trunc);
+        it.setLista(DataB);
+        for (long long i = 0; i < DataB.getSize(); i++)
+        {
+            it2.setLista(it.it->data);
+            for (long long i = 0; i < DataB[0].getSize(); i++)
+            {
+                Archivo<< it2.it->data;
+                if(i<DataB[0].getSize()-1){
+                    Archivo<<separador;
+                }
+                it2++;
+            }
+            Archivo<<"\n";
+            it++;
+        }
+        
+        Archivo.close();
+    }
+    void nombreArch(string name){
+        if(_Format(name)){
+            extencion = name.substr(name.find(".") + 1);
+            separador = opcions.pedirSeparadordecampos(extencion);
+            ArchNameComplete = name;
+        }else{
+            extencion = opcions.pedirExtencion();
+            separador = opcions.pedirSeparadordecampos(extencion);
+            ArchNameComplete = name + "." + extencion;
+        }
+    }
+    bool _Format(string name)
+    {
+        if (name.find(".") != string::npos)
+        {
+           return true;
+        }
+        else
+        {
+           return false;
+        }
+    }
     
-}
-    _export(string name)
-    {
-
-        this->name = name;
-        string extension;
-        extension = ".csv";
-        if (name.find(extension) != string::npos)
-        {
-            ExtensionType = ".csv";
-        }
-        else
-        {
-            ExtensionType = ".txt";
-        }
-    }
-    void save(T x)
-    {
-        ofstream fichero(name, ios::app);
-
-        fichero << x;
-        saveSpaces();
-    }
-
-    void saveSpaces()
-    {
-        ofstream fichero(name, ios::app);
-        if (ExtensionType == ".csv")
-        {
-
-            spaces = ";";
-        }
-        else
-        {
-            spaces = " ";
-        }
-        fichero << spaces;
-    }
-
-    bool getExtensionType()
-    {
-        if (ExtensionType == ".csv")
-            return true;
-        else
-            return false;
-    }
-
-    void close()
-    {
-        ofstream fichero(name);
-        fichero.close();
-    }
-    void clear()
-    {
-        ofstream fichero(name);
-        fichero.clear();
-    }
 };
 #endif // !__EXPORT_HPP__

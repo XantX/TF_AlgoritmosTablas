@@ -48,8 +48,11 @@ Index::Index()
 ArrTree Index::getArboles(){
     string C;
     cin.ignore();
-    cout<<"De que columna:\n";
-    getline(cin,C);
+    do
+    {
+        cout<<"De que columna:\n";
+        getline(cin,C);
+    } while(!MapaDeArbolXColumnas.count(C));
     return MapaDeArbolXColumnas[C];
 }
 map<string, ArrTree> Index::getAll(){

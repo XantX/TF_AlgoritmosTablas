@@ -7,7 +7,8 @@
     "vector": "cpp",
     "map": "cpp",
     "string": "cpp",
-    "iosfwd": "cpp"
+    "iosfwd": "cpp",
+    "xiosbase": "cpp"
   },
   "workbench.colorCustomizations": {
     "activityBar.background": "#5E0332",

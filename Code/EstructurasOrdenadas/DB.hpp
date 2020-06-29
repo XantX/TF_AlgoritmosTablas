@@ -14,12 +14,16 @@
 #include "ClassMenuDB.hpp"
 #include "Index.hpp"
 #include "Filtro.hpp"
+#include "Export.hpp"
 using namespace std;
 typedef ListaEnlazada<string> LS;
 typedef ListaEnlazada<LS> LLS;
 class DB
 {
 private:
+    string TablaName;
+    //Export
+    Export Exportar;
     //Menu y metodos de indexacion
     Index Arboles;
     //Filtro
@@ -46,7 +50,7 @@ private:
 
 
 public:
-    DB();
+    DB(string);
     //Metodos para setar el nombre de las columnas y agregar una fila
     void addFila();
     void addCOlunmasName();
@@ -66,12 +70,22 @@ public:
     map<string, ArrTree> getodo();
     //filtro
     void FiltroView();
+    //retornarNOmbre
+    string getNameTabla();
+    void ExportarOn();
     ~DB();
 };
 
-DB::DB()
+DB::DB(string name)
 {
+    this->TablaName = name;
+}
+string DB::getNameTabla(){
+    return TablaName;
+}
 
+void DB::ExportarOn(){
+    Exportar.exportOn(TablaName,DataB);
 }
 long long DB::getFilas() {
     return filas;

@@ -29,7 +29,7 @@ void TablasPrincipal::crearNewTabla(){
         getline(cin, nombre);
     } while (Tablas.count(nombre));
 
-    DB* TablaNueva = new DB();
+    DB* TablaNueva = new DB(nombre);
     TablaNueva->addCOlunmasName();
     Tablas[nombre] = TablaNueva;
 
@@ -51,12 +51,12 @@ void TablasPrincipal::crearNewTabla(){
 void TablasPrincipal::ImportTabla(){
     
     string Archivo = NombreDeArchivo();
-    DB* TablaNueva = new DB();
+    DB* TablaNueva = new DB(Archivo);
     TablaNueva->reading("Archivos/"+ Archivo);
     Tablas[Archivo] = TablaNueva;
 }
 void TablasPrincipal::Vertablas(){
-    cout<<"Las tablas que hay son:";
+    cout<<"Las tablas que hay son:\n";
     for (auto &i : Tablas)
     {
         cout<<i.first<<"\n";

@@ -14,6 +14,7 @@ void Tablamove::MenuTabla(DB*& Tabla,ClassMenu MenuT){
 bool Condi = true;
 while (Condi)
 {
+    cout<<"Tabla: "<<Tabla->getNameTabla()<<"\n";
     int opc = MenuT.Tabla();
     switch (opc)
     {
@@ -22,6 +23,7 @@ while (Condi)
         break;
         case 2:
         //export
+        Tabla->ExportarOn();
         break;
         case 3:
         Tabla->addFila();

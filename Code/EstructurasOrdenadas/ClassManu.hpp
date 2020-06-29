@@ -22,7 +22,6 @@ int ClassMenu::Tabla(){
     int opcion;
  do
  {
-    cout<<"\t\t\tTabla\n";
     cout<<"\t 1) Filtrar\n";
     cout<<"\t 2) Exportar tabla a archivo\n";
     cout<<"\t 3)Agregar Fila\n";

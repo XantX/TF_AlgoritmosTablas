@@ -14,10 +14,12 @@ private:
     ListaEnlazada<T> lista;
 public:
     Nodo<T>* it;
-    iterador(ListaEnlazada<T> &lista){
+    iterador(){
+        
+    }
+    void setLista(ListaEnlazada<T> &lista){
         this->lista = lista;
         it = this-> lista.inicio;
-        pos = 0;
     }
     ~iterador(){
     }
